@@ -10,10 +10,9 @@ Visualizaciones para ayudar al estudio Fisica Universitaria desarrollado por est
 
 Herramientas
 ------------
-- Git / Github
-- Python3.7
-- Tkinter
-- IDE
+- [Git](https://git-scm.com/downloads) + [Github](https://github.com/join)
+- [Python3.7](https://www.python.org/downloads/release/python-370/) + [Tkinter](https://docs.python.org/3.7/library/tk.html)
+- [Pycharm](https://www.jetbrains.com/pycharm/) (Opcional)
 
 Instalación
 ------------
