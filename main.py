@@ -26,4 +26,5 @@ class Application(tk.Frame):
 
 root = tk.Tk()
 app = Application(master=root)
+app.master.maxsize(600,600)
 app.mainloop()
