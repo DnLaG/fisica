@@ -26,9 +26,6 @@ class Application(Frame):
     def say_hi(self):
         print("Hello")
 
-    """Al momento de apretar el boton salir llama a esta funcion dialogo
-    la cual dependiendo de lo que se seleccione cerrara la aplicacion
-    """
     def quit_selection(self):
         close = messagebox.askquestion("Close","Desea salir?",icon='warning')
         if close == 'yes':
