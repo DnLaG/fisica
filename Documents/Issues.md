@@ -1,3 +1,11 @@
 # Problemas del proyecto
-[[!issues](https://github.com/ofou/fisica/issues)](https://github.com/ofou/fisica/issues)
-### Este archivo contiene la division del proyecto en pequeños problemas.
+### *Este archivo contiene la division del proyecto en pequeños problemas.*
+Problemas a resolver:
+====
+
+- [ ] 1. Interfaz Grafica
+   + Botones Redireccionadores a las diferentes ventanas.
+   + Cuadros de entrada de datos.
+   + Seleccion de paleta de colores.
+   + Optimizacion de interfaz amigable para el usuario.
+
