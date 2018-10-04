@@ -8,7 +8,10 @@ import tkinter as tk
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
-        self.pack()
+        #Base Resolution
+        self.pack(padx=200,pady=200)
+        #Widget title name
+        self.master.title("[WIP] Visualizador Grafico")
         self.create_widgets()
 
     def create_widgets(self):
@@ -27,5 +30,5 @@ class Application(tk.Frame):
 
 root = tk.Tk()
 app = Application(master=root)
-app.master.maxsize(600,600)
+app.master.maxsize(1024,1024)
 app.mainloop()
