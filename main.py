@@ -2,33 +2,41 @@
 #!/usr/bin/env python3
 
 
-import tkinter as tk
+from tkinter import*
+from tkinter import messagebox
 
 
-class Application(tk.Frame):
+class Application(Frame):
     def __init__(self, master=None):
         super().__init__(master)
         #Base Resolution
-        self.pack(padx=200,pady=200)
-        #Widget title name
+        #Widged Tittle
         self.master.title("[WIP] Visualizador Grafico")
         self.create_widgets()
 
     def create_widgets(self):
-        self.hi_there = tk.Button(self)
+        self.hi_there = Button(self.master)
         self.hi_there["text"] = "Hello World\n(click me)"
         self.hi_there["command"] = self.say_hi
-        self.hi_there.pack(side="top")
+        self.hi_there.grid(row = 0, column = 0, pady = 5, padx =5)
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",
-                              command=root.destroy)
-        self.quit.pack(side="bottom")
+        self.quit = Button(self.master, command = self.quit_selection, text = "Close")
+        self.quit.grid(row = 0, column = 1, pady = 5, padx =5)
 
     def say_hi(self):
-        print("hi there, everyone!")
+        print("Hello")
+
+    """Al momento de apretar el boton salir llama a esta funcion dialogo
+    la cual dependiendo de lo que se seleccione cerrara la aplicacion
+    """
+    def quit_selection(self):
+        close = messagebox.askquestion("Close","Desea salir?",icon='warning')
+        if close == 'yes':
+            self.master.quit()
 
 
-root = tk.Tk()
+root = Tk()
 app = Application(master=root)
+app.master.minsize(200,200)
 app.master.maxsize(1024,1024)
 app.mainloop()
