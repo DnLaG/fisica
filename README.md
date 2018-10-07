@@ -27,6 +27,14 @@ sudo snap install pycharm-community
 #### Windows
 * Descargar e instalar [Git](https://git-scm.com/downloads), [Python 3.7](https://www.python.org/downloads/release/python-370/) y [Pycharm](https://www.jetbrains.com/pycharm/) (opcional)
 
+Cómo colaborar
+--------------
+1. Clonar el repositorio ej. `git clone https://github.com/ofou/fisica.git`
+2. Añadir los archivos con cambios `git add ejemplo.txt` o añadir todos `git add .`
+3. Realizar un commit con una breve descripción de los cambios `git commit -m "Breve descripción"`
+4. Hacer `push` los cambios hacia el repositorio clonado
+5. Acceder al repositorio personal y hacer un `pull request`
+
 Roadmap
 -------
 - [x] Detalles del proyecto
