@@ -32,8 +32,8 @@ Cómo colaborar
 1. Clonar el repositorio ej. `git clone https://github.com/ofou/fisica.git`
 2. Añadir los archivos con cambios `git add ejemplo.txt` o añadir todos `git add .`
 3. Realizar un commit con una breve descripción de los cambios `git commit -m "Breve descripción"`
-4. Hacer `push` los cambios hacia el repositorio clonado
-5. Acceder al repositorio personal y hacer un `pull request`
+4. Enviar los cambios al repositorio personal `git push`
+5. Acceder al repositorio personal y hacer un `pull request` para enviar los cambios al repositorio central
 
 Roadmap
 -------
