@@ -6,7 +6,6 @@ Física
 ![GitHub contributors](https://img.shields.io/github/contributors/ofou/fisica.svg)
 
 Herramientas de visualización para ayudar al estudio Fisica Universitaria. 
-Software desarrollado por estudiantes de Ing. Civil Informática de la U. Católica del Maule
 
 Información general
 ------------
