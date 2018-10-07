@@ -1,6 +1,9 @@
 name: Proyecto de Fisica I UCM
 description: Visualizaciones de fisica universitaria
-theme: jekyll-theme-cayman
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
 author: Omar Olivares
 author_email: ofjolivares@gmail.com
 markdown: kramdown
