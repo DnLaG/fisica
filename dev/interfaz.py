@@ -15,7 +15,7 @@ class menu(tk.Frame):
     ventana.config(bg="white")
     ventana.config(relief="flat", bd=8) #tipo de borde relief y bd es la medida
 
-    frame = tk.Frame()
-    frame.pack(fill = "both", expand="true")
+    frame = tk.Frame(ventana) #Creamos un frame el cual pertenece a ventana
+    frame.pack(fill = "both", expand="true") #Empaquetamos el frame
     frame.config(bg = "#bfbfbf", width = propiedades.default_size_ancho, height = propiedades.default_size_alto) #Medidas iniciales de la ventana + Color de fondo
     ventana.mainloop()
