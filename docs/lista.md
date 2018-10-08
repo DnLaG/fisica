@@ -2,3 +2,4 @@
 Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuario)
 
 - Luis Sepulveda Martinez (@Owllxz)
+- Javier Soto Letelier (@Helrert)
