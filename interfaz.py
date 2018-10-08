@@ -4,4 +4,6 @@
 """
 #!/usr/bin/env python3
 
-import interfaz as ifz
+import tkinter as tk
+import ideal as id
+import balistico as bl
