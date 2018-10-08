@@ -5,4 +5,5 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 - Luis Sepulveda Martinez (@Owllxz)
 - Pablo Luengo Montecino (@DnLaG)
 - Nataniel Muñoz Sepulveda (@Xero999)
+- Nicolás Soto Troncoso (@DracoSt)
 - Greis Quezada Iturra (@matakuri)
