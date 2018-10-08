@@ -4,7 +4,7 @@
 """
 #!/usr/bin/env python3
 
-import interfaz as ifz
+from interfaz import *
 
 class propiedades():
     version = "0.0.0_build"
@@ -12,4 +12,4 @@ class propiedades():
     default_size_ancho = "1280"
 
 if __name__ == "__main__":
-    menu = ifz.menu() #Llamando a la clase menu para iniciar interfaz
+    pass
