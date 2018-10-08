@@ -7,3 +7,4 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 - Nataniel Muñoz Sepulveda (@Xero999)
 - Nicolás Soto Troncoso (@DracoSt)
 - Greis Quezada Iturra (@matakuri)
+- Javier Soto Letelier (@Helrert)
