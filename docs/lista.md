@@ -1,2 +1,1 @@
-username: DnLaG 
-Nombre: Pablo Luengo Montecino
+Pablo Luengo Montecino (@DnLaG)
