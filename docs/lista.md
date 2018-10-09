@@ -8,3 +8,4 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 - Nicolás Soto Troncoso (@DracoSt)
 - Greis Quezada Iturra (@matakuri)
 - Javier Soto Letelier (@Helrert)
+- Matias Pinochet Vega (@hyoga91)
