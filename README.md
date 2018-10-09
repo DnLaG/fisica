@@ -43,6 +43,7 @@ Cómo colaborar
 2. Añadir los archivos con cambios `git add ejemplo.txt` o añadir todos (con precaución) `git add .`
 3. Realizar un commit con una breve descripción de los cambios `git commit -m "Breve descripción"`
 4. Hacer un `pull request` para enviar los cambios al repositorio central
+5. Para actualizar los datos locales con el repositorio central `git pull upstream master` o `git fetch` si ya tienes configurado los remotes
 
 Roadmap
 -------
