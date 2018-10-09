@@ -31,7 +31,7 @@ Cómo colaborar
 --------------
 0. Hacer un [Fork](https://guides.github.com/activities/forking/) del repositorio central
 1. Clonar (localmente) el Fork que acabas de crear. `git clone https://github.com/USERNAME/fisica.git`
-2. Configurar el repositorio original con el personal usando ´git remote add upstream https://github.com/ofou/fisica.git´ (Es necesario solo la primera vez)
+2. Configurar el repositorio original con el personal usando `git remote add upstream https://github.com/ofou/fisica.git` (Es necesario solo la primera vez)
 2. Añadir los archivos con cambios `git add ejemplo.txt` o añadir todos (con precaución) `git add .`
 3. Realizar un commit con una breve descripción de los cambios `git commit -m "Breve descripción"`
 4. Hacer un `pull request` para enviar los cambios al repositorio central
