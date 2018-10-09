@@ -10,4 +10,6 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 6. Greis Quezada Iturra (@matakuri)
 7. Javier Soto Letelier (@Helrert)
 8. Bryan Mora Ibarra (@Siderck)
-9. Carlos Alegria(@KalegK)
+9. Lucas Vera López (@LucasVeraa)
+10. Matias Pinochet Vega (@hyoga91)
+11. Carlos Alegria(@KalegK)
