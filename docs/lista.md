@@ -12,3 +12,4 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 8. Bryan Mora Ibarra (@Siderck)
 9. Lucas Vera López (@LucasVeraa)
 10. Matias Pinochet Vega (@hyoga91)
+11. Carlos Alegria(@KalegK)
