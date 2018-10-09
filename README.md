@@ -48,8 +48,9 @@ Roadmap
 -------
 - [x] Detalles del proyecto
 - [x] Instrucciones de instalación
-- [ ] Creación de tutoriales
+- [x] Creación de tutoriales
 - [ ] Asignación de tareas
+- [ ] Desarrollo
 
 Recomendaciones
 ---------------
