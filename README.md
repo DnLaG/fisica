@@ -7,6 +7,8 @@ Física
 
 Herramientas de visualización para ayudar al estudio Fisica Universitaria. 
 
+![good motion ah?](http://i407.photobucket.com/albums/pp152/miniman796/Pivot/BasketballShot.gif)
+
 Información general
 -------------------
 
@@ -16,7 +18,7 @@ Como para muchos este es su primer encuentro con el software colaborativo de có
 
 Dentro de los detalles técnicos, para el presente trabajo utilizaremos [Git](https://git-scm.com/downloads) + [Github](https://github.com/join) para el trabajo colaborativo. El lenguaje de programación escogido fue Python el cual es el lenguaje en común, ahora para evitar problemas **todos** deben instalar y utilizar Python en su [**Versión 3.7**](https://www.python.org/downloads/release/python-370/) ya que será la versión oficial de este proyecto. Si deciden utilizar otra versión, y sus códigos no son compatibles con el código fuente, serán rechazados sus aportes al proyecto hasta no corregir los errores. También hemos escogido [Tkinter](https://docs.python.org/3.7/library/tk.html) como la librería gráfica para el proyecto dado a su extensa documentación y amplio número de tutoriales en internet, además de tener la ventaja de ser una librería incorporada en Python. Para este proyecto en especial, recomendamos el uso de un IDE especializado, especificamente [Pycharm](https://www.jetbrains.com/pycharm/) dado a que les ayudará a corregir errores menores, mantener un formato adecuado y además de tener la ventaja de tener un sistema de control de versiones integrado. 
 
-> "Para los que no tengan mucha experiencia utilizando versiones de control realicé un pequeño screencast de la instalación en Ubuntu y un tutorial breve de cómo colaborar a través de Github." – Omar
+> "Para los que no tengan mucha experiencia utilizando versiones de control realicé [un pequeño screencast](https://youtu.be/DKuHYdk4LAg) de la instalación en Windows y un tutorial breve de cómo colaborar a través de Github." – Omar
 
 Instalación
 ------------
@@ -41,13 +43,15 @@ Cómo colaborar
 2. Añadir los archivos con cambios `git add ejemplo.txt` o añadir todos (con precaución) `git add .`
 3. Realizar un commit con una breve descripción de los cambios `git commit -m "Breve descripción"`
 4. Hacer un `pull request` para enviar los cambios al repositorio central
+5. Para mantener [actualizado](https://www.youtube.com/watch?v=o-2fvj7GsOQ) tu repositorio con el repositorio central `git pull upstream master` o `git fetch` si ya tienes configurado los remotes
 
 Roadmap
 -------
 - [x] Detalles del proyecto
 - [x] Instrucciones de instalación
-- [ ] Creación de tutoriales
+- [x] Creación de tutoriales
 - [ ] Asignación de tareas
+- [ ] Desarrollo
 
 Recomendaciones
 ---------------
