@@ -10,4 +10,3 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 - Greis Quezada Iturra (@matakuri)
 - Javier Soto Letelier (@Helrert)
 - Bryan Mora Ibarra (@Siderck)
-- Don José Martinez (@proyectofisica)
