@@ -19,3 +19,4 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 15. Felipe Romero Aguirre (@C0DAA)
 16. Maximiliano Cáceres Galaz (@MaxiCaceresG)
 17. Christian Valdivia Pizarro (@ChristianValdiviaP)
+18.
