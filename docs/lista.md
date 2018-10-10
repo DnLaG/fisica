@@ -14,3 +14,4 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 10. Matias Pinochet Vega (@hyoga91)
 11. Carlos Alegria(@KalegK)
 12. Marcelo Lillo Sepúlveda (@lillo0)
+13. Nicolas Alarcon Marin (@baltiloka)
