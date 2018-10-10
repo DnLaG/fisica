@@ -17,4 +17,4 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 13. Nicolas Alarcon Marin (@baltiloka)
 14. Maro Rivera Delgado (@maroriv99)
 15. Felipe Romero Aguirre (@C0DAA)
-
+16. Maximiliano Cáceres Galaz (@MaxiCaceresG)
