@@ -18,4 +18,7 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 14. Maro Rivera Delgado (@maroriv99)
 15. Felipe Romero Aguirre (@C0DAA)
 16. Maximiliano Cáceres Galaz (@MaxiCaceresG)
-17. Marcelo Pérez Gomez (@ZetZeus)
+17. Christian Valdivia Pizarro (@ChristianValdiviaP)
+18. Fernando Sanhueza Oyarce (@FernandoSO)
+19. Cristobal Ruiz Diaz (@Ch4Z)
+20. Marcelo Pérez Gomez (@ZetZeus)
