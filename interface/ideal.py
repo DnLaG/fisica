@@ -30,15 +30,13 @@ class Interface():
         graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
-        variables.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        variables.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=False, padx=10, pady=10)
 
-        # ideal_button = ttk.Button(tutorial, text="Movimiento Ideal")
-        # ideal_button.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        # Añadir elementos de controles
 
-    def create_buttons(self, parent, a, b, c):
-        button1 = ttk.Button(parent, text="do task " + a)
-        button1.grid(row=1, column=1)
-        button2 = ttk.Button(parent, text="do task " + b)
-        button2.grid(row=2, column=1)
-        button3 = ttk.Button(parent, text="do task " + c)
-        button3.grid(row=3, column=1)
+        self.crear_controles(variables)
+
+    def crear_controles(self, variables):
+        my_scale = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=200)
+
+
