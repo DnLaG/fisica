@@ -4,7 +4,10 @@ from tkinter import filedialog
 
 
 def crear_titulos_de_controles(variables):
-    label = ttk.LabeledScale(variables, None, 0, 100)
+    texto_variable = tk.StringVar()
+    my_entry = ttk.Entry(variables, width=15, justify=tk.CENTER)
+    my_entry.pack(side=tk.TOP)
+    my_entry.insert(tk.END, "Posición inicial")
 
 
 def crear_controles(variables):
@@ -52,7 +55,7 @@ class Interface():
         separador.pack(side=tk.TOP, expand=False, ipady=10, fill=tk.X)
 
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
-        variables.pack(side=tk.BOTTOM, fill=tk.BOTH, ipadx=5, ipady=5)
+        variables.pack(side=tk.TOP, fill=tk.BOTH, ipadx=5, ipady=5)
 
         # Añadir elementos de controles
 
