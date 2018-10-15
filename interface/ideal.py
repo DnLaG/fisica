@@ -3,6 +3,25 @@ from tkinter import ttk
 from tkinter import filedialog
 
 
+def crear_titulos_de_controles(variables):
+    label = ttk.LabeledScale(variables, None, 0, 100)
+
+
+def crear_controles(variables):
+    var_x0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_x0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+    var_y0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_y0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+    var_z0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_z0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+    var_x = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+    var_y = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+    var_z = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_z.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+
+
 class Interface():
     def __init__(self):
         self.window = tk.Tk()
@@ -29,24 +48,13 @@ class Interface():
         graphics = ttk.LabelFrame(tab_ideal, text="Movimiento Ideal")
         graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=5, ipady=5)
 
+        separador = ttk.Separator(tab_ideal, orient="horizontal")
+        separador.pack(side=tk.TOP, expand=False, ipadx=5, ipady=10, fill=tk.X)
+
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
         variables.pack(side=tk.BOTTOM, fill=tk.BOTH, ipadx=5, ipady=5)
 
         # Añadir elementos de controles
 
-        self.crear_controles(variables)
-
-    def crear_controles(self, variables):
-        var_x0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-        var_x0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-        var_y0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-        var_y0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-        var_z0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-        var_z0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-        var_x = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-        var_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-        var_y = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-        var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-        var_z = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-        var_z.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-
+        crear_titulos_de_controles(variables)
+        crear_controles(variables)
