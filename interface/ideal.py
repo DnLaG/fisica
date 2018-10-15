@@ -49,7 +49,7 @@ class Interface():
         graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=5, ipady=5)
 
         separador = ttk.Separator(tab_ideal, orient="horizontal")
-        separador.pack(side=tk.TOP, expand=False, ipadx=5, ipady=10, fill=tk.X)
+        separador.pack(side=tk.TOP, expand=False, ipady=10, fill=tk.X)
 
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
         variables.pack(side=tk.BOTTOM, fill=tk.BOTH, ipadx=5, ipady=5)
