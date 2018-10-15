@@ -3,25 +3,27 @@ from tkinter import ttk
 from tkinter import filedialog
 
 
-def crear_titulos_de_controles(variables):
+def crear_titulos_de_controles(posicion, angulo, aceleracion):
     texto_variable = tk.StringVar()
-    my_entry = ttk.Entry(variables, width=15, justify=tk.CENTER)
-    my_entry.pack(side=tk.TOP)
-    my_entry.insert(tk.END, "Posición inicial")
+    posicion_entry = ttk.Entry(posicion, width=15, justify=tk.CENTER)
+    posicion_entry.pack(side=tk.TOP)
+    posicion_entry.insert(tk.END, "Posición inicial")
+
+    angulo_entry = ttk.Entry(angulo, width=15, justify=tk.CENTER)
+    angulo_entry.pack(side=tk.TOP)
+    angulo_entry.insert(tk.END, "Angulo")
+
+    aceleracion_entry = ttk.Entry(aceleracion, width=15, justify=tk.CENTER)
+    aceleracion_entry.pack(side=tk.TOP)
+    aceleracion_entry.insert(tk.END, "Aceleracion inicial")
 
 
-def crear_controles(variables):
-    var_x0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-    var_x0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-    var_y0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-    var_y0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-    var_z0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
-    var_z0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-    var_x = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+def crear_controles(posicion, movimiento, aceleracion):
+    var_x = ttk.Scale(posicion, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
     var_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-    var_y = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_y = ttk.Scale(movimiento, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
     var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-    var_z = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+    var_z = ttk.Scale(aceleracion, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
     var_z.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
 
 
@@ -55,9 +57,16 @@ class Interface():
         separador.pack(side=tk.TOP, expand=False, ipady=10, fill=tk.X)
 
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
-        variables.pack(side=tk.TOP, fill=tk.BOTH, ipadx=5, ipady=5)
+        variables.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, ipadx=5, ipady=5)
+
+        posicion = ttk.Frame(variables)
+        posicion.pack(side=tk.TOP)
+        movimiento = ttk.Frame(variables)
+        movimiento.pack(side=tk.TOP)
+        aceleracion = ttk.Frame(variables)
+        aceleracion.pack(side=tk.TOP)
 
         # Añadir elementos de controles
 
-        crear_titulos_de_controles(variables)
-        crear_controles(variables)
+        crear_titulos_de_controles(posicion, movimiento, aceleracion)
+        crear_controles(posicion, movimiento, aceleracion)
