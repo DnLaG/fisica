@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-
 def update_position_value(event):
     print(event.widget.get())
 
@@ -56,7 +55,7 @@ class Interface():
         aceleracion = ttk.Frame(variables)
         aceleracion.pack(side=tk.LEFT, padx=5, pady=5)
 
-        # Añadir elementos de entrada de textok
+        # Añadir elementos de entrada de texto
         posicion_entry = ttk.Entry(posicion, width=15, justify=tk.CENTER)
         posicion_entry.pack(side=tk.TOP)
         posicion_entry.insert(tk.END, "Posición inicial")
