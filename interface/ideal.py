@@ -57,14 +57,14 @@ class Interface():
         separador.pack(side=tk.TOP, expand=False, ipady=10, fill=tk.X)
 
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
-        variables.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, ipadx=5, ipady=5)
+        variables.pack(side=tk.LEFT, fill=tk.X, expand=True, ipadx=5, ipady=5)
 
         posicion = ttk.Frame(variables)
-        posicion.pack(side=tk.TOP)
+        posicion.pack(side=tk.LEFT)
         movimiento = ttk.Frame(variables)
-        movimiento.pack(side=tk.TOP)
+        movimiento.pack(side=tk.LEFT)
         aceleracion = ttk.Frame(variables)
-        aceleracion.pack(side=tk.TOP)
+        aceleracion.pack(side=tk.LEFTº)
 
         # Añadir elementos de controles
 
