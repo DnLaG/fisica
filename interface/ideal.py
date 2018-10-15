@@ -13,7 +13,7 @@ class Interface():
 
     def create_widgets(self):
         tab_frame = ttk.Notebook(self.window)
-        tab_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        tab_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=10, ipady=10)
 
         tab_ideal = tk.Frame(tab_frame)
         tab_balistica = tk.Frame(tab_frame)
@@ -27,17 +27,26 @@ class Interface():
         # tutorial.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=10, pady=10)
 
         graphics = ttk.LabelFrame(tab_ideal, text="Movimiento Ideal")
-        graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=5, ipady=5)
 
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
-        variables.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        variables.pack(side=tk.BOTTOM, fill=tk.BOTH, ipadx=5, ipady=5)
 
         # Añadir elementos de controles
 
         self.crear_controles(variables)
 
     def crear_controles(self, variables):
-        my_scale = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=200)
-        my_scale.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
-
+        var_x0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+        var_x0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+        var_y0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+        var_y0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+        var_z0 = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+        var_z0.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+        var_x = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+        var_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+        var_y = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+        var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
+        var_z = ttk.Scale(variables, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
+        var_z.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
 
