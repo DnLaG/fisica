@@ -36,14 +36,14 @@ class Interface():
         # tutorial = ttk.LabelFrame(self.window, text="Instrucciones")
         # tutorial.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=10, pady=10)
 
-        graphics = ttk.LabelFrame(tab_ideal, text="Movimiento Ideal")
-        graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=5, ipady=5)
+        graphics = ttk.LabelFrame(tab_ideal, text="Gráfica")
+        graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         separador = ttk.Separator(tab_ideal, orient="horizontal")
-        separador.pack(side=tk.TOP, expand=False, ipady=10, fill=tk.X)
+        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
 
         variables = ttk.LabelFrame(tab_ideal, text="Controles")
-        variables.pack(side=tk.LEFT, fill=tk.X, expand=True, ipadx=15, ipady=5)
+        variables.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=10)
 
         # Contenedores de los controles
         posicion = ttk.Frame(variables)
