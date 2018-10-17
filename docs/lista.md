@@ -23,3 +23,4 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 19. Cristobal Ruiz Diaz (@Ch4Z)
 20. Marcelo Pérez Gomez (@ZetZeus)
 21. Bastian Villavicencio Jara (@sk8elite)
+22. Michaol Thomas Moore Retamal (@atonx98)
