@@ -1,24 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
 
-def update_position_value(event):
-    print(event.widget.get())
 
-
-def update_angle_value(event):
-    print(event.widget.get())
-
-
-def update_acceleration_value(event):
-    print(event.widget.get())
-
-
-class Interface():
+class Interface:
     def __init__(self):
         self.window = tk.Tk()
         self.window.title("Fisica")
         self.window.minsize(800, 600)
         self.window.maxsize(1280, 960)
+        self.deslizador_posicion = ttk.Entry()
         self.create_widgets()
 
     def create_widgets(self):
@@ -56,14 +46,14 @@ class Interface():
         aceleracion.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Añadir elementos de entrada de texto
-        posicion_entry = ttk.Entry(posicion, width=15, justify=tk.CENTER)
-        posicion_entry.pack(side=tk.TOP)
-        posicion_entry.insert(tk.END, "Posición inicial")
+        self.deslizador_posicion = ttk.Entry(posicion, width=15, justify=tk.CENTER)
+        self.deslizador_posicion.pack(side=tk.TOP)
+        self.deslizador_posicion.insert(tk.END, "Posición inicial")
         var_x = ttk.Scale(posicion, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
         var_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
         var_x.set(50)
-        var_x.bind("<B1-Motion>", update_position_value)
-        var_x.bind("<ButtonRelease-1>", update_position_value)
+        var_x.bind("<B1-Motion>", self.update_position_value)
+        var_x.bind("<ButtonRelease-1>", self.update_position_value)
 
         angulo_entry = ttk.Entry(angulo, width=15, justify=tk.CENTER)
         angulo_entry.pack(side=tk.TOP)
@@ -71,8 +61,8 @@ class Interface():
         var_y = ttk.Scale(angulo, from_=0, to=360, orient=tk.HORIZONTAL, length=100)
         var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
         var_y.set(180)
-        var_y.bind("<B1-Motion>", update_angle_value)
-        var_y.bind("<ButtonRelease-1>", update_angle_value)
+        # var_y.bind("<B1-Motion>", update_angle_value)
+        # var_y.bind("<ButtonRelease-1>", update_angle_value)
 
         aceleracion_entry = ttk.Entry(aceleracion, width=15, justify=tk.CENTER)
         aceleracion_entry.pack(side=tk.TOP)
@@ -80,5 +70,17 @@ class Interface():
         var_y = ttk.Scale(aceleracion, from_=0, to=100, orient=tk.HORIZONTAL, length=100)
         var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=10, pady=10)
         var_y.set(50)
-        var_y.bind("<B1-Motion>", update_acceleration_value)
-        var_y.bind("<ButtonRelease-1>", update_acceleration_value)
+        # var_y.bind("<B1-Motion>", update_acceleration_value)
+        # var_y.bind("<ButtonRelease-1>", update_acceleration_value)
+
+    # Todo declarar todos los elementos de la interfaz dentro del __init__
+    def update_position_value(self):
+        self.deslizador_posicion.insert(tk.END, self.deslizador_posicion.get())
+
+    # Todo declarar todos los elementos de la interfaz dentro del __init__
+    def update_angle_value(self):
+        self.deslizador_posicion.insert(tk.END, self.deslizador_posicion.get())
+
+    # Todo declarar todos los elementos de la interfaz dentro del __init__
+    def update_acceleration_value(self):
+        self.deslizador_posicion.insert(tk.END, self.deslizador_posicion.get())
