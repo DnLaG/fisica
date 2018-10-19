@@ -22,4 +22,6 @@ Formato de ingreso colaboradores: - Nombre Apellido1 Apellido2 (@Nombre-de-usuar
 18. Fernando Sanhueza Oyarce (@FernandoSO)
 19. Cristobal Ruiz Diaz (@Ch4Z)
 20. Marcelo Pérez Gomez (@ZetZeus)
-21. Dennis Queirolo (@dennis-queirolo )
+21. Bastian Villavicencio Jara (@sk8elite)
+22. Michaol Thomas Moore Retamal (@atonx98)
+23. Dennis Queirolo (@dennis-queirolo )
