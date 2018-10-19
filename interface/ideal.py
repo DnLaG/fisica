@@ -9,30 +9,41 @@ class Interface:
         self.window.minsize(800, 600)
         self.window.maxsize(1280, 960)
         self.deslizador_posicion = ttk.Entry()
+
+        self.pestañas = ttk.Notebook(self.window)
+        self.tab_ideal = tk.Frame(self.pestañas)
+        self.opciones = ttk.Frame(self.tab_ideal)
+
+        # Inicializar los botones de la interfaz
+        self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad")
+
         self.create_widgets()
 
     def create_widgets(self):
-        tab_frame = ttk.Notebook(self.window)
-        tab_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=10, ipady=10)
 
-        tab_ideal = tk.Frame(tab_frame)
-        tab_balistica = tk.Frame(tab_frame)
-        tab_seguridad = tk.Frame(tab_frame)
+        self.pestañas.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=10, ipady=10)
 
-        tab_frame.add(tab_ideal, text="Movimiento Ideal", compound=tk.TOP)
-        tab_frame.add(tab_balistica, text="Movimiento Balistico", compound=tk.TOP)
-        tab_frame.add(tab_seguridad, text="Parabola Seguridad", compound=tk.TOP)
+        tab_balistica = tk.Frame(self.pestañas)
+        tab_seguridad = tk.Frame(self.pestañas)
+
+        self.pestañas.add(self.tab_ideal, text="Movimiento Ideal", compound=tk.TOP)
+        self.pestañas.add(tab_balistica, text="Movimiento Balistico", compound=tk.TOP)
+        self.pestañas.add(tab_seguridad, text="Parabola Seguridad", compound=tk.TOP)
 
         # tutorial = ttk.LabelFrame(self.window, text="Instrucciones")
         # tutorial.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=10, pady=10)
 
-        graphics = ttk.LabelFrame(tab_ideal, text="Gráfica")
+        self.opciones.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        self.boton_velocidad.pack(side=tk.TOP)
+
+        graphics = ttk.LabelFrame(self.tab_ideal, text="Gráfica")
         graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        separador = ttk.Separator(tab_ideal, orient="horizontal")
+        separador = ttk.Separator(self.tab_ideal, orient="horizontal")
         separador.pack(side=tk.TOP, expand=False, fill=tk.X)
 
-        variables = ttk.LabelFrame(tab_ideal, text="Controles")
+        variables = ttk.LabelFrame(self.tab_ideal, text="Controles")
         variables.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=10)
 
         # Contenedores de los controles
