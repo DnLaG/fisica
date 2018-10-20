@@ -57,8 +57,8 @@ class Interface:
         aceleracion.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
         # Añadir elementos de entrada de texto
-        self.deslizador_posicion = ttk.Entry(posicion, width=15, justify=tk.CENTER)
-        self.deslizador_posicion.pack(side=tk.TOP)
+        self.deslizador_posicion = ttk.Entry(posicion, justify=tk.CENTER)
+        self.deslizador_posicion.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.deslizador_posicion.insert(tk.END, "Posición inicial")
         var_x = ttk.Scale(posicion, from_=0, to=100, orient=tk.HORIZONTAL)
         var_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -66,8 +66,8 @@ class Interface:
         var_x.bind("<B1-Motion>", self.update_position_value)
         var_x.bind("<ButtonRelease-1>", self.update_position_value)
 
-        angulo_entry = ttk.Entry(angulo, width=15, justify=tk.CENTER)
-        angulo_entry.pack(side=tk.TOP)
+        angulo_entry = ttk.Entry(angulo, justify=tk.CENTER)
+        angulo_entry.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         angulo_entry.insert(tk.END, "Angulo")
         var_y = ttk.Scale(angulo, from_=0, to=360, orient=tk.HORIZONTAL)
         var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -75,8 +75,8 @@ class Interface:
         # var_y.bind("<B1-Motion>", update_angle_value)
         # var_y.bind("<ButtonRelease-1>", update_angle_value)
 
-        aceleracion_entry = ttk.Entry(aceleracion, width=15, justify=tk.CENTER)
-        aceleracion_entry.pack(side=tk.TOP)
+        aceleracion_entry = ttk.Entry(aceleracion, justify=tk.CENTER)
+        aceleracion_entry.pack(side=tk.TOP,fill=tk.BOTH, expand=True)
         aceleracion_entry.insert(tk.END, "Aceleración")
         var_y = ttk.Scale(aceleracion, from_=0, to=100, orient=tk.HORIZONTAL)
         var_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
