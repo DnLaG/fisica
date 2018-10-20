@@ -15,7 +15,7 @@ class Interface:
         self.opciones = ttk.Frame(self.tab_ideal)
 
         # Inicializar los botones de la interfaz
-        self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad")
+        self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad", width=10)
 
         self.create_widgets()
 
@@ -33,28 +33,28 @@ class Interface:
         # tutorial = ttk.LabelFrame(self.window, text="Instrucciones")
         # tutorial.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=10, pady=10)
 
-        self.opciones.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.opciones.pack(side=tk.RIGHT, fill=tk.BOTH, expand=False, padx=5, pady=5)
 
-        self.boton_velocidad.pack(side=tk.TOP)
+        self.boton_velocidad.pack(side=tk.TOP, padx=10, pady=10)
 
         graphics = ttk.LabelFrame(self.tab_ideal, text="Gráfica")
-        graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         separador = ttk.Separator(self.tab_ideal, orient="horizontal")
         separador.pack(side=tk.TOP, expand=False, fill=tk.X)
 
         variables = ttk.LabelFrame(self.tab_ideal, text="Controles")
-        variables.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=10)
+        variables.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5, pady=5)
 
         # Contenedores de los controles
         posicion = ttk.Frame(variables)
-        posicion.pack(side=tk.LEFT, padx=5, pady=5)
+        posicion.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
         angulo = ttk.Frame(variables)
-        angulo.pack(side=tk.LEFT, padx=5, pady=5)
+        angulo.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
         aceleracion = ttk.Frame(variables)
-        aceleracion.pack(side=tk.LEFT, padx=5, pady=5)
+        aceleracion.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
         # Añadir elementos de entrada de texto
         self.deslizador_posicion = ttk.Entry(posicion, width=15, justify=tk.CENTER)
