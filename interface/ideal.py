@@ -47,7 +47,7 @@ class Interface:
         self.deslizador_posicion = ttk.Entry()
 
         self.pestañas = ttk.Notebook(self.window)
-        self.tab_ideal = tk.Frame(self.pestañas)
+        self.tab_ideal = ttk.Frame(self.pestañas)
         self.opciones = ttk.Frame(self.tab_ideal)
 
         # Inicializar los botones de la interfaz
