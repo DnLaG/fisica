@@ -2,6 +2,42 @@ import tkinter as tk
 from tkinter import ttk
 
 
+def boton_posicion():
+    print("Click Botón Posición")
+
+
+def boton_velocidad():
+    pass
+
+
+def boton_aceleracion():
+    pass
+
+
+def boton_alcance_horizontal():
+    pass
+
+
+def boton_altura_maxima():
+    pass
+
+
+def boton_camino_recorrido():
+    pass
+
+
+def boton_radio_y_centro_de_curvatura():
+    pass
+
+
+def boton_aceleracion_normal_y_tangencial():
+    pass
+
+
+def boton_vector_normal():
+    pass
+
+
 class Interface:
     def __init__(self):
         self.window = tk.Tk()
@@ -15,15 +51,15 @@ class Interface:
         self.opciones = ttk.Frame(self.tab_ideal)
 
         # Inicializar los botones de la interfaz
-        self.boton_posicion = ttk.Button(self.opciones, text="Posición", width=10)
-        self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad", width=10)
-        self.boton_aceleracion = ttk.Button(self.opciones, text="Aceleración", width=10)
-        self.boton_alcance_horizontal = ttk.Button(self.opciones, text="Alcance Horizontal", width=10)
-        self.boton_altura_maxima = ttk.Button(self.opciones, text="Altura Màxima", width=10)
-        self.boton_camino_recorrido = ttk.Button(self.opciones, text="Camino Recorrido", width=10)
-        self.boton_radio_y_centro_de_curvatura = ttk.Button(self.opciones, text="Radio y Centro de Curvatura", width=10)
-        self.boton_aceleracion_normal_y_tangencial = ttk.Button(self.opciones, text="A. normal y tangencial", width=10)
-        self.boton_vector_normal = ttk.Button(self.opciones, text="Vector normal", width=10)
+        self.boton_posicion = ttk.Button(self.opciones, text="Posición", width=10, command=lambda: boton_posicion())
+        self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad", width=10, command=lambda: boton_velocidad())
+        self.boton_aceleracion = ttk.Button(self.opciones, text="Aceleración", width=10, command=lambda: boton_aceleracion())
+        self.boton_alcance_horizontal = ttk.Button(self.opciones, text="Alcance Horizontal", width=10, command=lambda: boton_alcance_horizontal())
+        self.boton_altura_maxima = ttk.Button(self.opciones, text="Altura Màxima", width=10, command=lambda: boton_altura_maxima())
+        self.boton_camino_recorrido = ttk.Button(self.opciones, text="Camino Recorrido", width=10, command=lambda: boton_camino_recorrido())
+        self.boton_radio_y_centro_de_curvatura = ttk.Button(self.opciones, text="Radio y Centro de Curvatura", width=10, command=lambda: boton_radio_y_centro_de_curvatura())
+        self.boton_aceleracion_normal_y_tangencial = ttk.Button(self.opciones, text="A. normal y tangencial", width=10, command=lambda: boton_aceleracion_normal_y_tangencial())
+        self.boton_vector_normal = ttk.Button(self.opciones, text="Vector normal", width=10, command=lambda: boton_vector_normal())
 
         self.create_widgets()
 
