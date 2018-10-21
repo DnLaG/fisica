@@ -38,6 +38,7 @@ def boton_vector_normal():
     pass
 
 
+
 class Interface:
     def __init__(self):
         self.window = tk.Tk()
@@ -48,6 +49,10 @@ class Interface:
         self.entrada_posicion_y0 = ttk.Entry()
         self.entrada_angulo_inicial = ttk.Entry()
         self.entrada_aceleracion_inicial = ttk.Entry()
+        self.deslizador_posicion_x0 = ttk.Scale()
+        self.deslizador_posicion_y0 = ttk.Scale()
+        self.deslizador_angulo_inicial = ttk.Scale()
+        self.deslizador_aceleracion_inicial = ttk.Scale()
 
         self.pestañas = ttk.Notebook(self.window)
         self.tab_ideal = ttk.Frame(self.pestañas)
@@ -67,6 +72,24 @@ class Interface:
         self.create_widgets()
 
     def create_widgets(self):
+
+        def f_posicion_x0(event):
+            print(posicion_x0.get())
+
+        def f_posicion_y0(event):
+            print(posicion_y0.get())
+
+        def f_angulo_inicial(event):
+            print(angulo_inicial.get())
+
+        def f_aceleracion_inicial(event):
+            print(aceleracion_inicial.get())
+
+        # Variables de los deslizadores
+        posicion_x0 = tk.IntVar()
+        posicion_y0 = tk.IntVar()
+        angulo_inicial = tk.IntVar()
+        aceleracion_inicial = tk.IntVar()
         self.pestañas.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=10, ipady=10)
 
         tab_balistica = tk.Frame(self.pestañas)
@@ -128,27 +151,30 @@ class Interface:
         self.entrada_aceleracion_inicial.insert(tk.END, "Aceleración")
 
         # Añadir elementos deslizadores para actualizar datos
-        deslizador_posicion_x0 = ttk.Scale(posicion, from_=0, to=100, orient=tk.HORIZONTAL)
-        deslizador_posicion_x0.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
-        deslizador_posicion_x0.set(50)
-        deslizador_posicion_x0.bind("<B1-Motion>", self.update_position_value)
-        deslizador_posicion_x0.bind("<ButtonRelease-1>", self.update_position_value)
+        self.deslizador_posicion_x0 = ttk.Scale(posicion, variable=posicion_x0,  from_=0, to=100, orient=tk.HORIZONTAL)
+        self.deslizador_posicion_x0.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.deslizador_posicion_x0.set(50)
+        self.deslizador_posicion_x0.bind("<B1-Motion>", f_posicion_x0)
+        self.deslizador_posicion_x0.bind("<ButtonRelease-1>", f_posicion_x0)
 
-        deslizador_posicion_y0 = ttk.Scale(posicion, from_=0, to=100, orient=tk.HORIZONTAL)
-        deslizador_posicion_y0.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
-        deslizador_posicion_y0.set(50)
-        deslizador_posicion_y0.bind("<B1-Motion>", self.update_position_value)
-        deslizador_posicion_y0.bind("<ButtonRelease-1>", self.update_position_value)
+        self.deslizador_posicion_y0 = ttk.Scale(posicion, variable=posicion_y0, from_=0, to=100, orient=tk.HORIZONTAL)
+        self.deslizador_posicion_y0.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.deslizador_posicion_y0.set(50)
+        self.deslizador_posicion_y0.bind("<B1-Motion>", f_posicion_y0)
+        self.deslizador_posicion_y0.bind("<ButtonRelease-1>", f_posicion_y0)
 
-        deslizador_angulo_inicial = ttk.Scale(angulo, from_=0, to=360, orient=tk.HORIZONTAL)
-        deslizador_angulo_inicial.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
-        deslizador_angulo_inicial.set(180)
+        self.deslizador_angulo_inicial = ttk.Scale(angulo, variable=angulo_inicial, from_=0, to=90, orient=tk.HORIZONTAL)
+        self.deslizador_angulo_inicial.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.deslizador_angulo_inicial.set(180)
+        self.deslizador_angulo_inicial.bind("<B1-Motion>", f_angulo_inicial)
 
-        deslizador_angulo_inicial = ttk.Scale(aceleracion, from_=0, to=100, orient=tk.HORIZONTAL)
-        deslizador_angulo_inicial.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
-        deslizador_angulo_inicial.set(50)
-        # deslizador_angulo_inicial.bind("<B1-Motion>", update_acceleration_value)
-        # deslizador_angulo_inicial.bind("<ButtonRelease-1>", update_acceleration_value)
+        self.deslizador_aceleracion_inicial = ttk.Scale(aceleracion, variable=aceleracion_inicial, from_=0, to=100, orient=tk.HORIZONTAL)
+        self.deslizador_aceleracion_inicial.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.deslizador_aceleracion_inicial.set(50)
+        self.deslizador_aceleracion_inicial.bind("<B1-Motion>", f_aceleracion_inicial)
+        self.deslizador_aceleracion_inicial.bind("<ButtonRelease-1>", f_aceleracion_inicial)
+
+
 
     # Todo declarar todos los elementos de la interfaz dentro del __init__
     def update_position_value(self):
