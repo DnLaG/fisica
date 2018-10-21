@@ -96,8 +96,9 @@ class Interface:
         tab_seguridad = tk.Frame(self.pestañas)
 
         self.pestañas.add(self.tab_ideal, text="Movimiento Ideal", compound=tk.TOP)
+        self.pestañas.add(tab_seguridad, text="Parabola de Seguridad", compound=tk.TOP)
         self.pestañas.add(tab_balistica, text="Movimiento Balistico", compound=tk.TOP)
-        self.pestañas.add(tab_seguridad, text="Parabola Seguridad", compound=tk.TOP)
+
 
         # tutorial = ttk.LabelFrame(self.window, text="Instrucciones")
         # tutorial.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=10, pady=10)
