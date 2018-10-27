@@ -86,6 +86,23 @@ class Interface:
         def f_aceleracion_inicial(event):
             print(aceleracion_inicial.get())
 
+        # Limpia Entry iniciales, de modo que al hacer click estos se vacian
+        def limpiar_entrada_x0(event):
+            if self.entrada_posicion_x0.get() == "X0":
+                self.entrada_posicion_x0.delete(0,'end')
+
+        def limpiar_entrada_y0(event):
+            if self.entrada_posicion_y0.get() == "Y0":
+                self.entrada_posicion_y0.delete(0,'end')
+
+        def limpiar_entrada_angulo(event):
+            if self.entrada_angulo_inicial.get() == "Angulo":
+                self.entrada_angulo_inicial.delete(0,'end')
+
+        def limpiar_entrada_aceleracion(event):
+            if self.entrada_aceleracion_inicial.get() == "Aceleración":
+                self.entrada_aceleracion_inicial.delete(0,'end')
+
         # Variables de los deslizadores
         posicion_x0 = tk.IntVar()
         posicion_y0 = tk.IntVar()
@@ -139,18 +156,22 @@ class Interface:
         self.entrada_posicion_x0 = ttk.Entry(posicion, justify=tk.CENTER)
         self.entrada_posicion_x0.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.entrada_posicion_x0.insert(tk.END, "X0")
+        self.entrada_posicion_x0.bind("<Button-1>", limpiar_entrada_x0)
 
         self.entrada_posicion_y0 = ttk.Entry(posicion, justify=tk.CENTER)
         self.entrada_posicion_y0.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.entrada_posicion_y0.insert(tk.END, "Y0")
+        self.entrada_posicion_y0.bind("<Button-1>", limpiar_entrada_y0)
 
         self.entrada_angulo_inicial = ttk.Entry(angulo, justify=tk.CENTER)
         self.entrada_angulo_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.entrada_angulo_inicial.insert(tk.END, "Angulo")
+        self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
 
         self.entrada_aceleracion_inicial = ttk.Entry(aceleracion, justify=tk.CENTER)
         self.entrada_aceleracion_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.entrada_aceleracion_inicial.insert(tk.END, "Aceleración")
+        self.entrada_aceleracion_inicial.bind("<Button-1>", limpiar_entrada_aceleracion)
 
         # Añadir elementos deslizadores para actualizar datos
         self.deslizador_posicion_x0 = ttk.Scale(posicion, variable=posicion_x0,  from_=0, to=100, orient=tk.HORIZONTAL)
