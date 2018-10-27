@@ -38,6 +38,9 @@ def boton_vector_normal():
     pass
 
 
+def boton_circulo_osculador():
+    pass
+
 
 class Interface:
     def __init__(self):
@@ -67,7 +70,10 @@ class Interface:
         self.boton_camino_recorrido = ttk.Button(self.opciones, text="Camino Recorrido", width=10, command=lambda: boton_camino_recorrido())
         self.boton_radio_y_centro_de_curvatura = ttk.Button(self.opciones, text="Radio y Centro de Curvatura", width=10, command=lambda: boton_radio_y_centro_de_curvatura())
         self.boton_aceleracion_normal_y_tangencial = ttk.Button(self.opciones, text="A. normal y tangencial", width=10, command=lambda: boton_aceleracion_normal_y_tangencial())
-        self.boton_vector_normal = ttk.Button(self.opciones, text="Vector normal", width=10, command=lambda: boton_vector_normal())
+        self.boton_vector_normal = ttk.Button(self.opciones, text="Vector normal", width=10,
+                                              command=lambda: boton_vector_normal())
+        self.boton_circulo_osculador = ttk.Button(self.opciones, text="Circulo Osculador", width=10,
+                                              command=lambda: boton_circulo_osculador())
 
         self.create_widgets()
 
@@ -131,6 +137,7 @@ class Interface:
         self.boton_radio_y_centro_de_curvatura.pack(side=tk.TOP, padx=10, pady=10)
         self.boton_aceleracion_normal_y_tangencial.pack(side=tk.TOP, padx=10, pady=10)
         self.boton_vector_normal.pack(side=tk.TOP, padx=10, pady=10)
+        self.boton_circulo_osculador.pack(side=tk.TOP, padx=10, pady=10)
 
         graphics = ttk.LabelFrame(self.tab_ideal, text="Gráfica")
         graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
