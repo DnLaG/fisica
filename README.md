@@ -50,7 +50,7 @@ Roadmap
 - [x] Detalles del proyecto
 - [x] Instrucciones de instalación
 - [x] Creación de tutoriales
-- [ ] Asignación de tareas
+- [x] Asignación de tareas
 - [ ] Desarrollo
 
 Recomendaciones
