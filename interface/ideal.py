@@ -1,5 +1,10 @@
 import tkinter as tk # ejecutar "sudo apt-get install python3-tk" si hay problemas con la importac
 from tkinter import ttk
+import numpy as np
+import matplotlib as mpl
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 
 def boton_posicion():
@@ -233,6 +238,14 @@ class Interface:
         self.deslizador_aceleracion_inicial.set(50)
         self.deslizador_aceleracion_inicial.bind("<B1-Motion>", f_aceleracion_inicial)
         self.deslizador_aceleracion_inicial.bind("<ButtonRelease-1>", f_aceleracion_inicial)
+
+        #Insercion Grafico en la zona indicada
+        fig = Figure(figsize=(5, 4), dpi=100)
+        t = np.arange(0, 3, .01)
+        fig.add_subplot(111).plot(t, 2 * np.sin(2 * np.pi * t))
+        canvas = FigureCanvasTkAgg(fig, master=graphics)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
 
 
