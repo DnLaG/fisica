@@ -1,8 +1,35 @@
-import tkinter as tk
+import tkinter as tk # ejecutar "sudo apt-get install python3-tk" si hay problemas con la importac
 from tkinter import ttk
 
 
 def boton_posicion():
+
+    #  inicializa la ventana popup
+    master = tk.Tk()
+
+    # Crea un frame contenedor para la izquierda y la derecha
+    frame_izquierda = ttk.Frame(master)
+    frame_derecha = ttk.Frame(master)
+    frame_abajo = ttk.Frame(master)
+    frame_derecha.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    frame_izquierda.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    frame_abajo.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True, padx=5, pady=5) # todo arreglar la posicion
+
+    # Crea las titulos de la entrada de datos
+    posicion_x = ttk.Label(frame_izquierda, text="Posicion inicial de X: ")
+    posicion_y = ttk.Label(frame_izquierda, text="Posicion inicial de Y: ")
+
+    # Crea formularios para entrada de datos
+    entrada_x = ttk.Entry(frame_derecha)
+    entrada_y = ttk.Entry(frame_derecha)
+    posicion_x.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    posicion_y.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    entrada_x.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    entrada_y.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+    boton_aceptar = ttk.Button(frame_abajo, text="Aceptar")
+    boton_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=False, padx=5, pady=5)
+
     print("Click Botón Posición")
 
 
@@ -106,7 +133,10 @@ class Interface:
 
         def limpiar_entrada_aceleracion(event):
             if self.entrada_aceleracion_inicial.get() == "Aceleración":
-                self.entrada_aceleracion_inicial.delete(0,'end')
+                self.entrada_aceleracion_inicial.delete(0,'end')+
+
+
+
 
         # Variables de los deslizadores
         posicion_x0 = tk.IntVar()
