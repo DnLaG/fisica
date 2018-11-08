@@ -1,5 +1,10 @@
 import tkinter as tk # ejecutar "sudo apt-get install python3-tk" si hay problemas con la importac
 from tkinter import ttk
+import numpy as np
+import matplotlib as mpl
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 
 def boton_posicion():
@@ -10,26 +15,27 @@ def boton_posicion():
     # Crea un frame contenedor para la izquierda y la derecha
     frame_izquierda = ttk.Frame(master)
     frame_derecha = ttk.Frame(master)
-    frame_abajo = ttk.Frame(master)
-    frame_derecha.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-    frame_izquierda.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-    frame_abajo.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True, padx=5, pady=5) # todo arreglar la posicion
+    frame_aceptar = ttk.Frame(master)
+
+    frame_izquierda.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    frame_derecha.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
     # Crea las titulos de la entrada de datos
     posicion_x = ttk.Label(frame_izquierda, text="Posicion inicial de X: ")
-    posicion_y = ttk.Label(frame_izquierda, text="Posicion inicial de Y: ")
+    posicion_y = ttk.Label(frame_derecha, text="Posicion inicial de Y: ")
+    aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
 
     # Crea formularios para entrada de datos
-    entrada_x = ttk.Entry(frame_derecha)
+    entrada_x = ttk.Entry(frame_izquierda)
     entrada_y = ttk.Entry(frame_derecha)
-    posicion_x.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-    posicion_y.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-    entrada_x.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-    entrada_y.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
-    boton_aceptar = ttk.Button(frame_abajo, text="Aceptar")
-    boton_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=False, padx=5, pady=5)
+    posicion_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
+    entrada_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+    aceptar.pack(fill=tk.BOTH, expand=1)
     print("Click Botón Posición")
 
 
@@ -133,7 +139,7 @@ class Interface:
 
         def limpiar_entrada_aceleracion(event):
             if self.entrada_aceleracion_inicial.get() == "Aceleración":
-                self.entrada_aceleracion_inicial.delete(0,'end')+
+                self.entrada_aceleracion_inicial.delete(0,'end')
 
 
 
@@ -232,6 +238,14 @@ class Interface:
         self.deslizador_aceleracion_inicial.set(50)
         self.deslizador_aceleracion_inicial.bind("<B1-Motion>", f_aceleracion_inicial)
         self.deslizador_aceleracion_inicial.bind("<ButtonRelease-1>", f_aceleracion_inicial)
+
+        #Insercion Grafico en la zona indicada
+        fig = Figure(figsize=(5, 4), dpi=100)
+        t = np.arange(0, 3, .01)
+        fig.add_subplot(111).plot(t, 2 * np.sin(2 * np.pi * t))
+        canvas = FigureCanvasTkAgg(fig, master=graphics)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
 
 
