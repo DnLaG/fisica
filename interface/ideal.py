@@ -7,15 +7,30 @@ from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 
-def boton_posicion():
-
+def boton_posicion(posicion_datos):
+    # Metodo para almacenar datos de las entradas de datos
+    def copiar_valores(event):
+        posicion_datos[0] = entrada_x.get()
+        posicion_datos[1] = entrada_y.get()
+        master.destroy()
+    # Metodo para validar la entrada de datos (Solo Numeros por ahora)
+    def check(v,p):
+        if p.isdigit():
+            return True
+        elif p is "":
+            return True
+        else:
+            return False
     #  inicializa la ventana popup
     master = tk.Tk()
+    master.title("Posicion")
 
     # Crea un frame contenedor para la izquierda y la derecha
     frame_izquierda = ttk.Frame(master)
     frame_derecha = ttk.Frame(master)
     frame_aceptar = ttk.Frame(master)
+    validacion_x = (frame_izquierda.register(check),'%v','%P')
+    validacion_y = (frame_derecha.register(check), '%v','%P')
 
     frame_izquierda.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
     frame_derecha.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
@@ -27,8 +42,8 @@ def boton_posicion():
     aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
 
     # Crea formularios para entrada de datos
-    entrada_x = ttk.Entry(frame_izquierda)
-    entrada_y = ttk.Entry(frame_derecha)
+    entrada_x = ttk.Entry(frame_izquierda, validate="key", validatecommand=validacion_x)
+    entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
 
     posicion_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
     posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
@@ -36,7 +51,7 @@ def boton_posicion():
     entrada_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
     entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
     aceptar.pack(fill=tk.BOTH, expand=1)
-    print("Click Botón Posición")
+    aceptar.bind("<Button-1>", copiar_valores)
 
 
 def boton_velocidad():
@@ -77,6 +92,9 @@ def boton_circulo_osculador():
 
 class Interface:
     def __init__(self):
+        # Lista de almacenado de datos
+        posicion_datos = [0, 0]
+
         self.window = tk.Tk()
         self.window.title("Fisica")
         self.window.minsize(800, 600)
@@ -95,7 +113,7 @@ class Interface:
         self.opciones = ttk.Frame(self.tab_ideal)
 
         # Inicializar los botones de la interfaz
-        self.boton_posicion = ttk.Button(self.opciones, text="Posición", width=10, command=lambda: boton_posicion())
+        self.boton_posicion = ttk.Button(self.opciones, text="Posición", width=10, command=lambda: boton_posicion(posicion_datos))
         self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad", width=10, command=lambda: boton_velocidad())
         self.boton_aceleracion = ttk.Button(self.opciones, text="Aceleración", width=10, command=lambda: boton_aceleracion())
         self.boton_alcance_horizontal = ttk.Button(self.opciones, text="Alcance Horizontal", width=10, command=lambda: boton_alcance_horizontal())
