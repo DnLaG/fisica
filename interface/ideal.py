@@ -22,7 +22,6 @@ def boton_posicion(posicion_datos):
         else:
             return False
     #  inicializa la ventana popup
-    valor = ""
     master = tk.Tk()
     master.title("Posicion")
 
@@ -258,7 +257,6 @@ class Interface:
         self.deslizador_aceleracion_inicial.bind("<B1-Motion>", f_aceleracion_inicial)
         self.deslizador_aceleracion_inicial.bind("<ButtonRelease-1>", f_aceleracion_inicial)
 
-        numeros = [1,2]
         #Insercion Grafico en la zona indicada
         fig = Figure(figsize=(5, 4), dpi=100)
         t = np.arange(0, 3, .01)
