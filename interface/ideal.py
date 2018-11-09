@@ -280,6 +280,3 @@ class Interface:
     # Todo declarar todos los elementos de la interfaz dentro del __init__
     def update_acceleration_value(self):
         self.entrada_posicion_x0.insert(tk.END, self.entrada_posicion_x0.get())
-
-#Declaracion de variables
-print("Hola")
