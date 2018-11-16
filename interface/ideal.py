@@ -248,7 +248,53 @@ class Interface:
         pass
 
     def boton_alcance_horizontalf(self):
-        pass
+        # Metodo para almacenar datos de las entradas de datos
+        def datos(event):
+            self.posicion_datos[0] = entrada_x.get()
+            self.posicion_datos[1] = entrada_y.get()
+            master.destroy()
+
+        # Metodo para validar la entrada de datos (Solo Numeros por ahora)
+        def check(v, p):
+            if p.isdigit():
+                return True
+            elif p is "":
+                return True
+            else:
+                return False
+
+        #  inicializa la ventana popup
+        master = tk.Tk()
+        master.title("Alcance Horizontal")
+
+        # Crea un frame contenedor para la izquierda y la derecha
+        frame_izquierda = ttk.Frame(master)
+        frame_derecha = ttk.Frame(master)
+        frame_aceptar = ttk.Frame(master)
+        validacion_x = (frame_izquierda.register(check), '%v', '%P')
+        validacion_y = (frame_derecha.register(check), '%v', '%P')
+
+        frame_izquierda.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_derecha.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        # Crea las titulos de la entrada de datos
+        Dato_1 = ttk.Label(frame_izquierda, text="Dato 1: ")
+        Dato_2 = ttk.Label(frame_derecha, text="Dato 2: ")
+        aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
+
+        # Crea formularios para entrada de datos
+        entrada_x = ttk.Entry(frame_izquierda, validate="key", validatecommand=validacion_x)
+        entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
+
+        Dato_1.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        Dato_2.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        entrada_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        aceptar.pack(fill=tk.BOTH, expand=1)
+        aceptar.bind("<Button-1>", datos)
+
 
     def boton_altura_maximaf(self):
         pass
