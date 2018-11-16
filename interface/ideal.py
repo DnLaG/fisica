@@ -32,12 +32,12 @@ class Interface:
         self.boton_alcance_horizontal = ttk.Button(self.opciones, text="Alcance Horizontal", width=10, command=lambda: self.boton_alcance_horizontalf())
         self.boton_altura_maxima = ttk.Button(self.opciones, text="Altura Màxima", width=10, command=lambda: self.boton_altura_maximaf())
         self.boton_camino_recorrido = ttk.Button(self.opciones, text="Camino Recorrido", width=10, command=lambda: self.boton_camino_recorridof())
-        self.boton_radio_y_centro_de_curvatura = ttk.Button(self.opciones, text="Radio y Centro de Curvatura", width=10, command=lambda: self.boton_radio_y_centro_de_curvaturaf())
+        self.boton_radio_y_centro_de_curvatura_circulo_obsculador = ttk.Button(self.opciones, text="Radio y Centro de Curvatura y Circulo Obsculador", width=10, command=lambda: self.boton_radio_y_centro_de_curvatura_circulo_obsculadorf())
         self.boton_aceleracion_normal_y_tangencial = ttk.Button(self.opciones, text="A. normal y tangencial", width=10, command=lambda: self.boton_aceleracion_normal_y_tangencialf())
         self.boton_vector_normal = ttk.Button(self.opciones, text="Vector normal", width=10,
                                               command=lambda: self.boton_vector_normalf())
-        self.boton_circulo_osculador = ttk.Button(self.opciones, text="Circulo Osculador", width=10,
-                                              command=lambda: self.boton_circulo_osculadorf())
+        #self.boton_circulo_osculador = ttk.Button(self.opciones, text="Circulo Osculador", width=10,
+                                              #command=lambda: self.boton_circulo_osculadorf())
 
         self.create_widgets()
 
@@ -101,10 +101,10 @@ class Interface:
         self.boton_alcance_horizontal.pack(side=tk.TOP, padx=10, pady=10)
         self.boton_altura_maxima.pack(side=tk.TOP, padx=10, pady=10)
         self.boton_camino_recorrido.pack(side=tk.TOP, padx=10, pady=10)
-        self.boton_radio_y_centro_de_curvatura.pack(side=tk.TOP, padx=10, pady=10)
+        self.boton_radio_y_centro_de_curvatura_circulo_obsculador.pack(side=tk.TOP, padx=10, pady=10)
         self.boton_aceleracion_normal_y_tangencial.pack(side=tk.TOP, padx=10, pady=10)
         self.boton_vector_normal.pack(side=tk.TOP, padx=10, pady=10)
-        self.boton_circulo_osculador.pack(side=tk.TOP, padx=10, pady=10)
+        #self.boton_circulo_osculador.pack(side=tk.TOP, padx=10, pady=10)
 
         graphics = ttk.LabelFrame(self.tab_ideal, text="Gráfica")
         graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
@@ -119,11 +119,12 @@ class Interface:
         posicion = ttk.Frame(variables)
         posicion.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
+        Rapidez = ttk.Frame(variables)
+        Rapidez.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
+
         angulo = ttk.Frame(variables)
         angulo.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
-        Rapidez = ttk.Frame(variables)
-        Rapidez.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
         # Añadir elementos de entrada de texto
         self.entrada_posicion_x0 = ttk.Entry(posicion, justify=tk.CENTER)
@@ -136,15 +137,16 @@ class Interface:
         self.entrada_posicion_y0.insert(tk.END, "Y0")
         self.entrada_posicion_y0.bind("<Button-1>", limpiar_entrada_y0)
 
-        self.entrada_angulo_inicial = ttk.Entry(angulo, justify=tk.CENTER)
-        self.entrada_angulo_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-        self.entrada_angulo_inicial.insert(tk.END, "Angulo")
-        self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
-
         self.entrada_Rapidez_inicial = ttk.Entry(Rapidez, justify=tk.CENTER)
         self.entrada_Rapidez_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.entrada_Rapidez_inicial.insert(tk.END, "Rapidez Inicial")
         self.entrada_Rapidez_inicial.bind("<Button-1>", limpiar_entrada_Rapidez)
+
+        self.entrada_angulo_inicial = ttk.Entry(angulo, justify=tk.CENTER)
+        self.entrada_angulo_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        self.entrada_angulo_inicial.insert(tk.END, "Angulo Inicial")
+        self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
+
 
         # Añadir elementos deslizadores para actualizar datos
         self.deslizador_posicion_x0 = ttk.Scale(posicion, variable=posicion_x0,  from_=0, to=100, orient=tk.HORIZONTAL)
@@ -171,13 +173,12 @@ class Interface:
         self.deslizador_Rapidez_inicial.bind("<ButtonRelease-1>", f_Rapidez_inicial)
 
         #Insercion Grafico en la zona indicada
-        fig = Figure(figsize=(5, 4), dpi=100)
-        t = np.arange(0, 3, .01)
-        fig.add_subplot(111).plot(t, 2 * np.sin(2 * np.pi * t))
-        canvas = FigureCanvasTkAgg(fig, master=graphics)
+        figura = Figure(figsize=(4, 3), dpi=100) # define la proporcion del gráfico
+        ecuacion = np.arange(0, 10, .01)
+        figura.add_subplot(111).plot(ecuacion, ecuacion * ecuacion)
+        canvas = FigureCanvasTkAgg(figura, master=graphics)
         canvas.draw()
         canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-
 
 
     # Todo declarar todos los elementos de la interfaz dentro del __init__
@@ -196,8 +197,7 @@ class Interface:
     def boton_posicionf(self):
         # Metodo para almacenar datos de las entradas de datos
         def copiar_valores(event):
-            self.posicion_datos[0] = entrada_x.get()
-            self.posicion_datos[1] = entrada_y.get()
+            self.tiempo_datos[0] = entrada_tiempo.get()
             master.destroy()
 
         # Metodo para validar la entrada de datos (Solo Numeros por ahora)
@@ -208,41 +208,54 @@ class Interface:
                 return True
             else:
                 return False
+        # Datos Iniciales
 
         #  inicializa la ventana popup
         master = tk.Tk()
         master.title("Posicion")
-
         # Crea un frame contenedor para la izquierda y la derecha
-        frame_izquierda = ttk.Frame(master)
-        frame_derecha = ttk.Frame(master)
+        frame_arriba = ttk.Frame(master)
+        frame_centro = ttk.Frame(master)
+        frame_abajo = ttk.Frame(master)
         frame_aceptar = ttk.Frame(master)
-        validacion_x = (frame_izquierda.register(check), '%v', '%P')
-        validacion_y = (frame_derecha.register(check), '%v', '%P')
+        validacion_tiempo = (frame_abajo.register(check), '%v', '%P')
+        #validacion_y = (frame_derecha.register(check), '%v', '%P')
 
-        frame_izquierda.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        frame_derecha.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_arriba.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_centro.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_abajo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
         frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         # Crea las titulos de la entrada de datos
-        posicion_x = ttk.Label(frame_izquierda, text="Posicion inicial de X: ")
-        posicion_y = ttk.Label(frame_derecha, text="Posicion inicial de Y: ")
+        tiempo =  ttk.Label(frame_abajo, text="Tiempo: ")
         aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
-
+        tiempo_init = ttk.Label(frame_arriba, text="Intervalo de tiempo")
+        tiempo_init_x = ttk.Entry(frame_arriba, state='readonly', justify='center')
+        tiempo_init_y = ttk.Entry(frame_arriba, state='readonly')
+        tiempo_init.pack(side=tk.TOP)
+        tiempo_init_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_x.configure(state='normal')
+        tiempo_init_x.delete(0,'end')
+        tiempo_init_x.insert(0,"0")
+        tiempo_init_x.configure(state='readonly')
+        #Separador de datos
+        separador = ttk.Separator(frame_centro, orient="horizontal")
+        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
         # Crea formularios para entrada de datos
-        entrada_x = ttk.Entry(frame_izquierda, validate="key", validatecommand=validacion_x)
-        entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
+        entrada_tiempo = ttk.Entry(frame_abajo, validate="key", validatecommand=validacion_tiempo)
+        #entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
 
-        posicion_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        #posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
-        entrada_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        entrada_tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+       # entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
         aceptar.pack(fill=tk.BOTH, expand=1)
         aceptar.bind("<Button-1>", copiar_valores)
 
     def boton_velocidadf(self):
-        print(self.posicion_datos[0:2])
+        pass
 
     def boton_aceleracionf(self):
 
@@ -257,7 +270,7 @@ class Interface:
     def boton_camino_recorridof(self):
         pass
 
-    def boton_radio_y_centro_de_curvaturaf(self):
+    def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
         pass
 
     def boton_aceleracion_normal_y_tangencialf(self):
@@ -266,9 +279,6 @@ class Interface:
     def boton_vector_normalf(self):
         pass
 
-    def boton_circulo_osculadorf(self):
-        pass
-
     # Lista de almacenado de datos
-    posicion_datos = [0, 0]
+    tiempo_datos = [0, 0]
 
