@@ -52,8 +52,8 @@ class Interface:
         def f_angulo_inicial(event):
             print(angulo_inicial.get())
 
-        def f_aceleracion_inicial(event):
-            print(aceleracion_inicial.get())
+        def f_Rapidez_inicial(event):
+            print(Rapidez_inicial.get())
 
         # Limpia Entry iniciales, de modo que al hacer click estos se vacian
         def limpiar_entrada_x0(event):
@@ -68,9 +68,9 @@ class Interface:
             if self.entrada_angulo_inicial.get() == "Angulo":
                 self.entrada_angulo_inicial.delete(0,'end')
 
-        def limpiar_entrada_aceleracion(event):
-            if self.entrada_aceleracion_inicial.get() == "Aceleración":
-                self.entrada_aceleracion_inicial.delete(0,'end')
+        def limpiar_entrada_Rapidez(event):
+            if self.entrada_Rapidez_inicial.get() == "Rapidez Inicial":
+                self.entrada_Rapidez_inicial.delete(0,'end')
 
 
 
@@ -79,7 +79,7 @@ class Interface:
         posicion_x0 = tk.IntVar()
         posicion_y0 = tk.IntVar()
         angulo_inicial = tk.IntVar()
-        aceleracion_inicial = tk.IntVar()
+        Rapidez_inicial = tk.IntVar()
         self.pestañas.pack(side=tk.TOP, fill=tk.BOTH, expand=True, ipadx=10, ipady=10)
 
         tab_balistica = tk.Frame(self.pestañas)
@@ -122,8 +122,8 @@ class Interface:
         angulo = ttk.Frame(variables)
         angulo.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
-        aceleracion = ttk.Frame(variables)
-        aceleracion.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
+        Rapidez = ttk.Frame(variables)
+        Rapidez.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
         # Añadir elementos de entrada de texto
         self.entrada_posicion_x0 = ttk.Entry(posicion, justify=tk.CENTER)
@@ -141,10 +141,10 @@ class Interface:
         self.entrada_angulo_inicial.insert(tk.END, "Angulo")
         self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
 
-        self.entrada_aceleracion_inicial = ttk.Entry(aceleracion, justify=tk.CENTER)
-        self.entrada_aceleracion_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-        self.entrada_aceleracion_inicial.insert(tk.END, "Aceleración")
-        self.entrada_aceleracion_inicial.bind("<Button-1>", limpiar_entrada_aceleracion)
+        self.entrada_Rapidez_inicial = ttk.Entry(Rapidez, justify=tk.CENTER)
+        self.entrada_Rapidez_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        self.entrada_Rapidez_inicial.insert(tk.END, "Rapidez Inicial")
+        self.entrada_Rapidez_inicial.bind("<Button-1>", limpiar_entrada_Rapidez)
 
         # Añadir elementos deslizadores para actualizar datos
         self.deslizador_posicion_x0 = ttk.Scale(posicion, variable=posicion_x0,  from_=0, to=100, orient=tk.HORIZONTAL)
@@ -164,11 +164,11 @@ class Interface:
         self.deslizador_angulo_inicial.set(180)
         self.deslizador_angulo_inicial.bind("<B1-Motion>", f_angulo_inicial)
 
-        self.deslizador_aceleracion_inicial = ttk.Scale(aceleracion, variable=aceleracion_inicial, from_=0, to=100, orient=tk.HORIZONTAL)
-        self.deslizador_aceleracion_inicial.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
-        self.deslizador_aceleracion_inicial.set(50)
-        self.deslizador_aceleracion_inicial.bind("<B1-Motion>", f_aceleracion_inicial)
-        self.deslizador_aceleracion_inicial.bind("<ButtonRelease-1>", f_aceleracion_inicial)
+        self.deslizador_Rapidez_inicial = ttk.Scale(Rapidez, variable=Rapidez_inicial, from_=0, to=100, orient=tk.HORIZONTAL)
+        self.deslizador_Rapidez_inicial.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.deslizador_Rapidez_inicial.set(50)
+        self.deslizador_Rapidez_inicial.bind("<B1-Motion>", f_Rapidez_inicial)
+        self.deslizador_Rapidez_inicial.bind("<ButtonRelease-1>", f_Rapidez_inicial)
 
         #Insercion Grafico en la zona indicada
         fig = Figure(figsize=(5, 4), dpi=100)
@@ -245,6 +245,7 @@ class Interface:
         print(self.posicion_datos[0:2])
 
     def boton_aceleracionf(self):
+
         pass
 
     def boton_alcance_horizontalf(self):
