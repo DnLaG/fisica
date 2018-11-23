@@ -24,7 +24,14 @@ class Interface:
         self.pestañas = ttk.Notebook(self.window)
         self.tab_ideal = ttk.Frame(self.pestañas)
         self.opciones = ttk.Frame(self.tab_ideal)
+        self.graphics = ttk.LabelFrame(self.tab_ideal, text="Gráfica")
 
+        self.figura = Figure(figsize=(4, 3), dpi=100)  # define la proporcion del gráfico
+        self.ecuacion = np.arange(0, 10, .01)
+        self.figura.add_subplot(111).plot(self.ecuacion, self.ecuacion * self.ecuacion)
+        self.canvas = FigureCanvasTkAgg(self.figura, master=self.graphics)
+        self.canvas.draw()
+        self.canvas = self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
         # Inicializar los botones de la interfaz
         self.boton_posicion = ttk.Button(self.opciones, text="Posición", width=10, command=lambda: self.boton_posicionf())
         self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad", width=10, command=lambda: self.boton_velocidadf())
@@ -106,8 +113,8 @@ class Interface:
         self.boton_vector_normal.pack(side=tk.TOP, padx=10, pady=10)
         #self.boton_circulo_osculador.pack(side=tk.TOP, padx=10, pady=10)
 
-        graphics = ttk.LabelFrame(self.tab_ideal, text="Gráfica")
-        graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        self.graphics.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         separador = ttk.Separator(self.tab_ideal, orient="horizontal")
         separador.pack(side=tk.TOP, expand=False, fill=tk.X)
@@ -173,12 +180,6 @@ class Interface:
         self.deslizador_Rapidez_inicial.bind("<ButtonRelease-1>", f_Rapidez_inicial)
 
         #Insercion Grafico en la zona indicada
-        figura = Figure(figsize=(4, 3), dpi=100) # define la proporcion del gráfico
-        ecuacion = np.arange(0, 10, .01)
-        figura.add_subplot(111).plot(ecuacion, ecuacion * ecuacion)
-        canvas = FigureCanvasTkAgg(figura, master=graphics)
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
 
     # Todo declarar todos los elementos de la interfaz dentro del __init__
@@ -192,9 +193,9 @@ class Interface:
     # Todo declarar todos los elementos de la interfaz dentro del __init__
     def update_acceleration_value(self):
         self.entrada_posicion_x0.insert(tk.END, self.entrada_posicion_x0.get())
-
-    # Declaracion de botones
+    # Declaracion de botones0
     def boton_posicionf(self):
+        self.actualizar_grafico()
         # Metodo para almacenar datos de las entradas de datos
         def copiar_valores(event):
             self.tiempo_datos[0] = entrada_tiempo.get()
@@ -285,7 +286,11 @@ class Interface:
 
     def boton_vector_normalf(self):
         pass
+    def actualizar_grafico(self):
+        self.figura.clear()
+        s = np.cos(np.pi*self.ecuacion)
+        self.figura.add_subplot(111).plot(self.ecuacion, s)
+        self.figura.canvas.draw()
 
     # Lista de almacenado de datos
     tiempo_datos = [0, 0]
-
