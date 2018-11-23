@@ -198,6 +198,7 @@ class Interface:
         # Metodo para almacenar datos de las entradas de datos
         def copiar_valores(event):
             self.tiempo_datos[0] = entrada_tiempo.get()
+
             master.destroy()
 
         # Metodo para validar la entrada de datos (Solo Numeros por ahora)
@@ -239,6 +240,12 @@ class Interface:
         tiempo_init_x.delete(0,'end')
         tiempo_init_x.insert(0,"0")
         tiempo_init_x.configure(state='readonly')
+        # inicializa el punto de interseccion del eje Y
+        tiempo_init_y.configure(state='normal')
+        tiempo_init_y.delete(0, 'end')
+        tiempo_init_y.insert(0, "0")
+        tiempo_init_y.configure(state='readonly')
+
         #Separador de datos
         separador = ttk.Separator(frame_centro, orient="horizontal")
         separador.pack(side=tk.TOP, expand=False, fill=tk.X)
