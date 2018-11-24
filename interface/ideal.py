@@ -227,7 +227,7 @@ class Interface:
         frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         # Crea las titulos de la entrada de datos
-        tiempo =  ttk.Label(frame_abajo, text="Tiempo: ")
+        tiempo = ttk.Label(frame_abajo, text="Tiempo: ")
         aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
         tiempo_init = ttk.Label(frame_arriba, text="Intervalo de tiempo")
         tiempo_init_x = ttk.Entry(frame_arriba, state='readonly', justify='center')
@@ -258,7 +258,31 @@ class Interface:
         pass
 
     def boton_aceleracionf(self):
+        #pop up de ingreso de datos
 
+        Pop_Up = tk.Tk()
+        Pop_Up.title("Aceleracion")
+        Pop_Up.minsize(400,300)
+
+        label = tk.Label(Pop_Up)
+        label.pack()
+
+        button = tk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
+        button.pack(side=tk.BOTTOM)
+
+        #ciclo de la ventana emergente
+        Pop_Up.mainloop()
+
+        #generamiento de la grafica
+
+
+        #generacion del punto de posicion a medir
+
+
+        #generacion del vector con origen en el punto de posicion
+
+
+        #posible desplazamiento con deslizador
         pass
 
     def boton_alcance_horizontalf(self):
