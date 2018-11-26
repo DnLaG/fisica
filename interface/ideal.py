@@ -279,6 +279,15 @@ class Interface:
         pass
 
     def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
+        print("TEST")
+        ang=np.pi/3
+        g = 10
+        v0=150
+        x0=0
+        x=100
+        #eq1 = (np.abs(-g/(np.power(v0*np.cos(ang)),2))/np.power(1+(np.power(np.tan(ang)-(g/(v0*np.power(np.cos(ang),2))*(x-x0)),2)),3/2))
+        eq2 = (np.abs(-g/(np.power(v0*np.cos(ang),2)))/(np.power(1+np.power(np.tan(ang)-g/np.power(v0*np.cos(ang),2)*(x-x0),2),3/2)))
+        print ("Pos x: "+str(eq2))
         pass
 
     def boton_aceleracion_normal_y_tangencialf(self):
