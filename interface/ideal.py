@@ -9,6 +9,9 @@ from matplotlib.backends.backend_tkagg import (
 
 class Interface:
     def __init__(self):
+        self.gravedad = 9.8
+        self.velocidad_inicial = 10
+        self.angulo = np.radians(2)
         self.window = tk.Tk()
         self.window.title("Fisica")
         self.window.minsize(800, 600)
@@ -33,6 +36,8 @@ class Interface:
         self.canvas = FigureCanvasTkAgg(self.figura, master=self.graphics)
         self.canvas.draw()
         self.canvas = self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+
         # Inicializar los botones de la interfaz
         self.boton_posicion = ttk.Button(self.opciones, text="Posición", width=10, command=lambda: self.boton_posicionf())
         self.boton_velocidad = ttk.Button(self.opciones, text="Velocidad", width=10, command=lambda: self.boton_velocidadf())
@@ -300,9 +305,12 @@ class Interface:
         pass
     def actualizar_grafico(self):
         self.figura.clear() # Refresca el gráfico
-        x = linspace(-10, 3, 601)
-        y2 = -.5 * (x + 1) ** 2 + 2
-        self.figura.add_subplot(111).plot(x,y2, "--", linewidth=0.5)
+        y0 = 3
+        x0 = 0
+        x = linspace(x0, x0+10, 1000)
+        ecuacion = ((y0 + (tan(self.angulo)*(x - x0))) - ((self.gravedad/(2*self.velocidad_inicial**2))*(1+(tan(self.angulo)**2))*((x - x0))**2))
+        self.figura.add_subplot(111).plot(x,ecuacion, "--")
+        self.figura.add_subplot(111).plot(x0, y0,'r.')
         self.figura.canvas.draw()
 
     #
