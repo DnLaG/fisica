@@ -67,6 +67,14 @@ class Interface:
             if self.entrada_posicion_x0.get() == "X0":
                 self.entrada_posicion_x0.delete(0,'end')
 
+        def update_x0(event):
+            # todo ecuacion que se actualiza automatricamente
+            input_x0 = self.entrada_posicion_x0.get()
+            if input_x0 == '':
+                input_x0 = 0
+                self.actualizar_grafico(self.ecuacion * float(5),8,8,8)
+            self.actualizar_grafico(self.ecuacion * float(5),8,8,8)
+
         def limpiar_entrada_y0(event):
             if self.entrada_posicion_y0.get() == "Y0":
                 self.entrada_posicion_y0.delete(0,'end')
@@ -133,22 +141,25 @@ class Interface:
         angulo.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
 
 
-        # Añadir elementos de entrada de texto
+        #todo añadir titulos
         self.entrada_posicion_x0 = ttk.Entry(posicion, justify=tk.CENTER)
         self.entrada_posicion_x0.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-        self.entrada_posicion_x0.insert(tk.END, "X0")
+        self.entrada_posicion_x0.insert(tk.END, "0")
         self.entrada_posicion_x0.bind("<Button-1>", limpiar_entrada_x0)
+        self.entrada_posicion_x0.bind("<Key>", update_x0)
 
         self.entrada_posicion_y0 = ttk.Entry(posicion, justify=tk.CENTER)
         self.entrada_posicion_y0.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-        self.entrada_posicion_y0.insert(tk.END, "Y0")
+        self.entrada_posicion_y0.insert(tk.END, "0")
         self.entrada_posicion_y0.bind("<Button-1>", limpiar_entrada_y0)
 
+        # todo titulos para rapidez inicial
         self.entrada_Rapidez_inicial = ttk.Entry(Rapidez, justify=tk.CENTER)
         self.entrada_Rapidez_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.entrada_Rapidez_inicial.insert(tk.END, "Rapidez Inicial")
         self.entrada_Rapidez_inicial.bind("<Button-1>", limpiar_entrada_Rapidez)
 
+        # todo titulos para angulo inicial
         self.entrada_angulo_inicial = ttk.Entry(angulo, justify=tk.CENTER)
         self.entrada_angulo_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.entrada_angulo_inicial.insert(tk.END, "Angulo Inicial")
@@ -287,9 +298,15 @@ class Interface:
     def boton_vector_normalf(self):
         pass
     def actualizar_grafico(self):
-        self.figura.clear()
+        self.figura.clear() # Refresca el gráfico
         s = np.cos(np.pi*self.ecuacion)
         self.figura.add_subplot(111).plot(self.ecuacion, s)
+        self.figura.canvas.draw()
+
+    def actualizar_grafico(self, x0, y0, rapidez, angulo):
+        self.figura.clear() # Refresca el gráfico
+        s = np.cos(2)
+        self.figura.add_subplot(111).plot(self.ecuacion, self.ecuacion**x0)
         self.figura.canvas.draw()
 
     # Lista de almacenado de datos
