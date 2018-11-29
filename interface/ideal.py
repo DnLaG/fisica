@@ -1,6 +1,7 @@
 import tkinter as tk # ejecutar "sudo apt-get install python3-tk" si hay problemas con la importac
 from tkinter import ttk
 import numpy as np
+from numpy import *
 import matplotlib as mpl
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
@@ -299,15 +300,17 @@ class Interface:
         pass
     def actualizar_grafico(self):
         self.figura.clear() # Refresca el gráfico
-        s = np.cos(np.pi*self.ecuacion)
-        self.figura.add_subplot(111).plot(self.ecuacion, s)
+        x = linspace(-10, 3, 601)
+        y2 = -.5 * (x + 1) ** 2 + 2
+        self.figura.add_subplot(111).plot(x,y2, "--", linewidth=0.5)
         self.figura.canvas.draw()
 
-    def actualizar_grafico(self, x0, y0, rapidez, angulo):
-        self.figura.clear() # Refresca el gráfico
-        s = np.cos(2)
-        self.figura.add_subplot(111).plot(self.ecuacion, self.ecuacion**x0)
-        self.figura.canvas.draw()
+    #
+    # def actualizar_grafico(self):
+    #     self.figura.clear() # Refresca el gráfico
+    #     s = np.cos(2)
+    #     self.figura.add_subplot(111).plot(self.ecuacion, self.ecuacion)
+    #     self.figura.canvas.draw()
 
     # Lista de almacenado de datos
     tiempo_datos = [0, 0]
