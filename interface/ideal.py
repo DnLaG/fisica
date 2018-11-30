@@ -12,7 +12,7 @@ class Interface:
         # Valores Iniciales
         self.gravedad = 9.8
         self.velocidad_inicial = 10
-        self.angulo = np.radians(2) #2pi
+        self.angulo = np.radians(2)
         self.x0 = 5
         self.y0 = 8
         self.z0 = 0
@@ -303,7 +303,7 @@ class Interface:
         label = tk.Label(Pop_Up)
         label.pack()
 
-        button = tk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
+        button = ttk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
         button.pack(side=tk.BOTTOM)
 
         #ciclo de la ventana emergente
