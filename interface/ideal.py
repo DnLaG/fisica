@@ -10,9 +10,13 @@ import math
 
 class Interface:
     def __init__(self):
+        # Valores Iniciales
         self.gravedad = 9.8
         self.velocidad_inicial = 10
-        self.angulo = np.radians(2)
+        self.angulo = np.radians(2) #2pi
+        self.x0 = 5
+        self.y0 = 8
+        self.z0 = 0
         self.window = tk.Tk()
         self.window.title("Fisica")
         self.window.minsize(800, 600)
@@ -213,7 +217,14 @@ class Interface:
         self.entrada_posicion_x0.insert(tk.END, self.entrada_posicion_x0.get())
     # Declaracion de botones0
     def boton_posicionf(self):
-        self.actualizar_grafico()
+        alcanze_horizontal = self.x0 + ((self.velocidad_inicial*sin(2*self.angulo))/(2*self.gravedad)) + \
+                             ((self.velocidad_inicial*cos(self.angulo)) /
+                              (self.gravedad))*sqrt(((self.velocidad_inicial*sin(self.angulo))**2) + 2*self.y0*self.gravedad)
+        x = linspace(0, alcanze_horizontal, 601)
+
+        ecuacion_parametrica_x = (self.x0 + self.velocidad_inicial*cos(self.angulo)*x)
+        ecuacion_parametrica_y = (self.y0 + self.velocidad_inicial*sin(self.angulo)*x-(self.gravedad/2)*x**2)
+        self.actualizar_grafico(ecuacion_parametrica_x,ecuacion_parametrica_y)
         # Metodo para almacenar datos de las entradas de datos
         def copiar_valores(event):
             self.tiempo_datos[0] = entrada_tiempo.get()
@@ -369,14 +380,10 @@ class Interface:
 
     def boton_vector_normalf(self):
         pass
-    def actualizar_grafico(self):
+    def actualizar_grafico(self,ecuacion_x,ecuacion_y):
         self.figura.clear() # Refresca el gráfico
-        y0 = 3
-        x0 = 0
-        x = linspace(x0, x0+10, 1000)
-        ecuacion = ((y0 + (tan(self.angulo)*(x - x0))) - ((self.gravedad/(2*self.velocidad_inicial**2))*(1+(tan(self.angulo)**2))*((x - x0))**2))
-        self.figura.add_subplot(111).plot(x,ecuacion, "--")
-        self.figura.add_subplot(111).plot(x0, y0,'r.')
+        self.figura.add_subplot(111).plot(ecuacion_x,ecuacion_y, "--")
+        # self.figura.add_subplot(111).plot(x0, y0, 'r.')
         self.figura.canvas.draw()
 
     #
