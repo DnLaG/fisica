@@ -245,6 +245,41 @@ class Interface:
         print(self.posicion_datos[0:2])
 
     def boton_aceleracionf(self):
+        # pop up de ingreso de datos
+
+        # funcion de tiempo de impacto
+        def tiempo_impact():
+            return 0
+
+        # pop up
+
+        Pop_Up = tk.Tk()
+        Pop_Up.title("Aceleracion")
+        Pop_Up.minsize(400, 300)
+
+        label = tk.Label(Pop_Up)
+        label.pack()
+
+        #crear frame contenedor
+
+        # Separador de datos
+        separador = ttk.Separator(Pop_Up, orient="horizontal")
+        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
+
+        e = ttk.Entry(Pop_Up)
+        e.pack(side=tk.BOTTOM, expand=True)
+
+        button = ttk.Button(Pop_Up, text='Evaluar', width=10, command=Pop_Up.destroy)
+        button.pack(side=tk.BOTTOM, padx=5, pady=5)
+
+        Pop_Up.mainloop()
+
+        # formulas de generamiento de datos a graficar
+        # funcion para el calculo de la coordenada horizontal
+        # generamiento de la grafica
+        # generacion del punto de posicion a medir
+        # generacion del vector con origen en el punto de posicion
+        # posible desplazamiento con deslizador
 
         pass
 
