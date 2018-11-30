@@ -151,9 +151,19 @@ class Interface:
 
         self.entrada_angulo_inicial = ttk.Entry(angulo, justify=tk.CENTER)
         self.entrada_angulo_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+<<<<<<< .merge_file_f0oZlI
         self.entrada_angulo_inicial.insert(tk.END, "Angulo Inicial")
         self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
 
+=======
+        self.entrada_angulo_inicial.insert(tk.END, "Angulo inicial")
+        self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
+
+        self.entrada_aceleracion_inicial = ttk.Entry(aceleracion, justify=tk.CENTER)
+        self.entrada_aceleracion_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        self.entrada_aceleracion_inicial.insert(tk.END, "Rapidez inicial")
+        self.entrada_aceleracion_inicial.bind("<Button-1>", limpiar_entrada_aceleracion)
+>>>>>>> .merge_file_aHAXiI
 
         # Añadir elementos deslizadores para actualizar datos
         self.deslizador_posicion_x0 = ttk.Scale(posicion, variable=posicion_x0,  from_=0, to=100, orient=tk.HORIZONTAL)
