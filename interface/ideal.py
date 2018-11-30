@@ -279,15 +279,29 @@ class Interface:
         pass
 
     def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
-        print("TEST")
+        # DATOS DE PRUEBA
+
         ang=np.pi/3
         g = 10
+        t = 1
         v0=150
-        x0=0
-        x=100
-        #eq1 = (np.abs(-g/(np.power(v0*np.cos(ang)),2))/np.power(1+(np.power(np.tan(ang)-(g/(v0*np.power(np.cos(ang),2))*(x-x0)),2)),3/2))
-        eq2 = (np.abs(-g/(np.power(v0*np.cos(ang),2)))/(np.power(1+np.power(np.tan(ang)-g/np.power(v0*np.cos(ang),2)*(x-x0),2),3/2)))
-        print ("Pos x: "+str(eq2))
+        x0=10
+        x=0
+
+        ##################
+        # ECUACIONES
+
+        curvatura_pos = (np.abs(-g/(np.power(v0*np.cos(ang),2)))/(np.power(1+np.power(np.tan(ang)-g/np.power(v0*np.cos(ang),2)*(x-x0),2),3/2)))
+        curvatura_t = (np.abs(-(g)/np.power(v0*np.cos(ang),2))/np.power(1+np.power(np.tan(ang)-(g/v0*np.cos(ang)*t),2),3/2))
+        r_curvatura_pos = ((np.power(1+np.power(np.tan(ang)-g/(np.power(v0*np.cos(ang),2)*(x-x0)),2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
+        r_curvatura_t = ((np.power(1+np.power(np.tan(ang)-g/v0*np.tan(ang)*t,2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
+        #centro_curvatura_puntoP =
+        print("Curvatura en tiempo X: "+str(curvatura_t))
+        print("Curvatura en posicion: "+str(curvatura_pos))
+        print("Radio en posicion: "+str(r_curvatura_pos))
+        print("Radio en tiempo X:"+str(r_curvatura_t))
+
+        ##################
         pass
 
     def boton_aceleracion_normal_y_tangencialf(self):
