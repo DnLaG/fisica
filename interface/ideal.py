@@ -6,6 +6,7 @@ import matplotlib as mpl
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
+import math
 
 class Interface:
     def __init__(self):
@@ -314,6 +315,47 @@ class Interface:
         pass
 
     def boton_altura_maximaf(self):
+        x0 = self.entrada_posicion_x0.get()
+        y0 = self.entrada_posicion_y0.get()
+        angulo_inicial = self.entrada_angulo_inicial.get()
+        v_inicial = self.entrada_Rapidez_inicial.get()
+        arriba = pow((v_inicial * sin(angulo_inicial)), 2)
+        result = (arriba / (2 * 9.8))
+        result = result + y0
+        print(result)
+
+        def copiar_valores(event):
+            master.destroy()
+
+        def check(v, p):
+            if p.isdigit():
+                return True
+            elif p is "":
+                return True
+            else:
+                return False
+
+        master = tk.Tk()
+        master.title("Altura Maxima")
+        frame_izquierda = ttk.Frame(master)
+        frame_derecha = ttk.Frame(master)
+        frame_aceptar = ttk.Frame(master)
+        validacion_x = (frame_izquierda.register(check), '%v', '%P')
+        validacion_y = (frame_derecha.register(check), '%v', '%P')
+        frame_izquierda.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_derecha.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        posicion_x = ttk.Label(frame_izquierda, text="Posicion inicial de X: ")
+        posicion_y = ttk.Label(frame_derecha, text="Posicion inicial de Y: ")
+        aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
+        entrada_x = ttk.Entry(frame_izquierda, validate="key", validatecommand=validacion_x)
+        entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
+        posicion_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        entrada_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        aceptar.pack(fill=tk.BOTH, expand=1)
+        aceptar.bind("<Button-1>", copiar_valores)
         pass
 
     def boton_camino_recorridof(self):
