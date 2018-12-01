@@ -3,6 +3,7 @@ from tkinter import ttk
 import numpy as np
 from numpy import *
 import matplotlib as mpl
+import matplotlib.pyplot as mpl
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -306,10 +307,17 @@ class Interface:
         button = ttk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
         button.pack(side=tk.BOTTOM)
 
+        # generamiento de la grafica
+
+        x = self.x0
+        
+        y = self.y0
+
+        mpl.plot(x , y, "g--")
+        mpl.show()
+
         #ciclo de la ventana emergente
         Pop_Up.mainloop()
-
-        #generamiento de la grafica
 
 
         #generacion del punto de posicion a medir
