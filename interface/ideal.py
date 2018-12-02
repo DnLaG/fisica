@@ -297,6 +297,11 @@ class Interface:
     def boton_aceleracionf(self):
         #pop up de ingreso de datos
 
+        #funcion para la obtencion de tiempo impacto final
+        def time_impact(self):
+            
+            return 2.7
+
         Pop_Up = tk.Tk()
         Pop_Up.title("Aceleracion")
         Pop_Up.minsize(400,300)
@@ -307,18 +312,23 @@ class Interface:
         button = ttk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
         button.pack(side=tk.BOTTOM)
 
+        # funcion para el calculo de la coordenada horizontal
+        def cord_x(self, t):
+            x = self.x0 + ((self.velocidad_inicial * cos(self.angulo)) * t)
+            return x
+
+        # funcion para el calculo de la coordenada vertical
+        def cord_y(self, t):
+            y = self.y0 + (((self.velocidad_inicial * (cos(self.angulo))) * t) - ((self.gravedad / 2) * (t ** 2)))
+            return y
+
         # generamiento de la grafica
-
-        x = self.x0
-        
-        y = self.y0
-
-        mpl.plot(x , y, "g--")
+        t = time_impact(self)
+        time = np.arange(0,t,0.1)
+        x = cord_x(self, time)
+        y = cord_y(self, time)
+        mpl.plot(x,y,"r--")
         mpl.show()
-
-        #ciclo de la ventana emergente
-        Pop_Up.mainloop()
-
 
         #generacion del punto de posicion a medir
 
