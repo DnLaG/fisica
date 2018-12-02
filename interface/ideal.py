@@ -3,6 +3,7 @@ from tkinter import ttk
 import numpy as np
 from numpy import *
 import matplotlib as mpl
+import matplotlib.pyplot as mpl
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -12,7 +13,7 @@ class Interface:
         # Valores Iniciales
         self.gravedad = 9.8
         self.velocidad_inicial = 10
-        self.angulo = np.radians(2) #2pi
+        self.angulo = np.radians(2)
         self.x0 = 5
         self.y0 = 8
         self.z0 = 0
@@ -296,6 +297,11 @@ class Interface:
     def boton_aceleracionf(self):
         #pop up de ingreso de datos
 
+        #funcion para la obtencion de tiempo impacto final
+        def time_impact(self):
+
+            return 2.7
+
         Pop_Up = tk.Tk()
         Pop_Up.title("Aceleracion")
         Pop_Up.minsize(400,300)
@@ -303,14 +309,27 @@ class Interface:
         label = tk.Label(Pop_Up)
         label.pack()
 
-        button = tk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
+        button = ttk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
         button.pack(side=tk.BOTTOM)
 
-        #ciclo de la ventana emergente
-        Pop_Up.mainloop()
+        # funcion para el calculo de la coordenada horizontal
+        def cord_x(self, t):
+            x = self.x0 + ((self.velocidad_inicial * cos(self.angulo)) * t)
+            return x
 
-        #generamiento de la grafica
+        # funcion para el calculo de la coordenada vertical
+        def cord_y(self, t):
+            y = self.y0 + (((self.velocidad_inicial * (cos(self.angulo))) * t) - ((self.gravedad / 2) * (t ** 2)))
+            return y
 
+        # generamiento de la grafica
+
+        t = time_impact(self)
+        time = np.arange(0,t,0.01)
+        x = cord_x(self, time)
+        y = cord_y(self, time)
+        mpl.plot(x,y,"r--")
+        mpl.show()
 
         #generacion del punto de posicion a medir
 
