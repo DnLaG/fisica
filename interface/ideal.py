@@ -299,7 +299,7 @@ class Interface:
 
         #funcion para la obtencion de tiempo impacto final
         def time_impact(self):
-            
+
             return 2.7
 
         Pop_Up = tk.Tk()
@@ -323,8 +323,9 @@ class Interface:
             return y
 
         # generamiento de la grafica
+
         t = time_impact(self)
-        time = np.arange(0,t,0.1)
+        time = np.arange(0,t,0.01)
         x = cord_x(self, time)
         y = cord_y(self, time)
         mpl.plot(x,y,"r--")
