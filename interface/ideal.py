@@ -151,19 +151,9 @@ class Interface:
 
         self.entrada_angulo_inicial = ttk.Entry(angulo, justify=tk.CENTER)
         self.entrada_angulo_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-<<<<<<< .merge_file_f0oZlI
         self.entrada_angulo_inicial.insert(tk.END, "Angulo Inicial")
         self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
 
-=======
-        self.entrada_angulo_inicial.insert(tk.END, "Angulo inicial")
-        self.entrada_angulo_inicial.bind("<Button-1>", limpiar_entrada_angulo)
-
-        self.entrada_aceleracion_inicial = ttk.Entry(aceleracion, justify=tk.CENTER)
-        self.entrada_aceleracion_inicial.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-        self.entrada_aceleracion_inicial.insert(tk.END, "Rapidez inicial")
-        self.entrada_aceleracion_inicial.bind("<Button-1>", limpiar_entrada_aceleracion)
->>>>>>> .merge_file_aHAXiI
 
         # Añadir elementos deslizadores para actualizar datos
         self.deslizador_posicion_x0 = ttk.Scale(posicion, variable=posicion_x0,  from_=0, to=100, orient=tk.HORIZONTAL)
@@ -305,13 +295,17 @@ class Interface:
         curvatura_t = (np.abs(-(g)/np.power(v0*np.cos(ang),2))/np.power(1+np.power(np.tan(ang)-(g/v0*np.cos(ang)*t),2),3/2))
         r_curvatura_pos = ((np.power(1+np.power(np.tan(ang)-g/(np.power(v0*np.cos(ang),2)*(x-x0)),2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
         r_curvatura_t = ((np.power(1+np.power(np.tan(ang)-g/v0*np.tan(ang)*t,2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
-        #centro_curvatura_puntoP =
+        centro_cuvatura_x=x-(((np.tan(ang)-(g/np.power(v0*np.cos(ang),2))*(x-x0))*(1+np.power(np.tan(ang)-(g/np.power(v0*np.cos(ang)*(x-x0),2)),2)))/(-g/np.power(v0*np.cos(ang),2)))
+        #centro_curvatura_y=
         print("Curvatura en tiempo X: "+str(curvatura_t))
         print("Curvatura en posicion: "+str(curvatura_pos))
         print("Radio en posicion: "+str(r_curvatura_pos))
         print("Radio en tiempo X:"+str(r_curvatura_t))
+        print("Centro de curvatura pos x:" +str(centro_cuvatura_x))
 
         ##################
+
+        # TEST DRAW #
         pass
 
     def boton_aceleracion_normal_y_tangencialf(self):
