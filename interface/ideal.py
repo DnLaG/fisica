@@ -13,9 +13,9 @@ class Interface:
         # Valores Iniciales
         self.gravedad = 9.8
         self.velocidad_inicial = 10
-        self.angulo = np.radians(2)
-        self.x0 = 5
-        self.y0 = 8
+        self.angulo = np.radians(4)
+        self.x0 = 2
+        self.y0 = 2
         self.z0 = 0
         self.window = tk.Tk()
         self.window.title("Fisica")
@@ -297,9 +297,9 @@ class Interface:
     def boton_aceleracionf(self):
         #pop up de ingreso de datos
 
-        #funcion para la obtencion de tiempo impacto final
+            #funcion para la obtencion de tiempo impacto final
         def time_impact(self):
-
+            
             return 2.7
 
         Pop_Up = tk.Tk()
@@ -312,31 +312,54 @@ class Interface:
         button = ttk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
         button.pack(side=tk.BOTTOM)
 
-        # funcion para el calculo de la coordenada horizontal
+            #tiempo ingresado por el usuario(temporal)
+
+        time_usuario = 1.6
+
+        #funciones para generamiento del grafico
+
+            # funcion para el calculo de la coordenada horizontal
         def cord_x(self, t):
             x = self.x0 + ((self.velocidad_inicial * cos(self.angulo)) * t)
             return x
 
-        # funcion para el calculo de la coordenada vertical
+            # funcion para el calculo de la coordenada vertical
         def cord_y(self, t):
             y = self.y0 + (((self.velocidad_inicial * (cos(self.angulo))) * t) - ((self.gravedad / 2) * (t ** 2)))
             return y
 
+
         # generamiento de la grafica
 
-        t = time_impact(self)
-        time = np.arange(0,t,0.01)
+            #generacion de la grafica del tiempo ingresado
+        time = np.arange(0,time_usuario,0.0001)
         x = cord_x(self, time)
         y = cord_y(self, time)
-        mpl.plot(x,y,"r--")
+
+            #grafica completa del lanzamiento
+        time_complete = np.arange(0,time_impact(self), 0.01)
+        x2 = cord_x(self, time_complete)
+        y2 = cord_y(self, time_complete)
+
+            #generacion del punto de posicion a medir
+        x3 = cord_x(self, time_usuario)
+        y3 = cord_y(self, time_usuario)
+
+            #estetica de la grafica
+        mpl.title("Aceleracion")
+        mpl.xlim(0,25)
+        mpl.ylim(0,10)
+        mpl.xlabel("-Distancia-")
+        mpl.ylabel("-Altura-")
+
+            #generamiento de las curvas
+        mpl.plot(self.x0, self.y0, "k-o")
+        mpl.plot(x,y,"y-")
+        mpl.plot(x2,y2,"k--")
+        mpl.plot(x3, y3, "r-o")
         mpl.show()
 
-        #generacion del punto de posicion a medir
-
-
         #generacion del vector con origen en el punto de posicion
-
-
         #posible desplazamiento con deslizador
         pass
 
