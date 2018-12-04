@@ -356,21 +356,19 @@ class Interface:
         pass
 
     def boton_vector_normalf(self):
-        xo=0
-        yo=0
-        vxo=10
-        vyo=50
-        ax = 9
-        ay = 4
-        TiempoFinal= 5
+        tiempofinal= 5
+        xo = 0
+        yo = 0
+        vxo = 15
+        vyo = 90
         plt.title("Vector Normal")
-        plt.xlabel("-Tiempo-")
-        plt.ylabel("-Posicion-")
-        x=np.arange(0,TiempoFinal,0.001)
-        y=yo+vyo*x+(1/2)*-9.8*x**2
-        z=xo+vxo*x+(1/2)*0*x**2
-    plt.plot(x,y)
-    plt.show()
+        plt.xlabel("-X-")
+        plt.ylabel("-Y-")
+        x = np.arange(0, tiempofinal, 0.001)
+        y = yo + vyo * x + (1 / 2) * -9.8 * x ** 2
+        z = xo + vxo * x + (1 / 2) * 0 * x ** 2
+        plt.plot(z, y,"-")
+        plt.show()
 
         pass
     def actualizar_grafico(self,ecuacion_x,ecuacion_y):
