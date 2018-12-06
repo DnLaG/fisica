@@ -365,11 +365,14 @@ class Interface:
         plt.xlabel("-X-")
         plt.ylabel("-Y-")
         x = np.arange(0, tiempofinal, 0.001)
+        x1 = 3
         y = yo + vyo * x + (1 / 2) * -9.8 * x ** 2
         z = xo + vxo * x + (1 / 2) * 0 * x ** 2
+        y1 = yo + vyo * x1 + (1 / 2) * -9.8 * x1 ** 2
+        z1 = xo + vxo * x1 + (1 / 2) * 0 * x1 ** 2
         plt.plot(z, y,"-")
+        plt.plot(z1, y1, "-o")
         plt.show()
-
         pass
     def actualizar_grafico(self,ecuacion_x,ecuacion_y):
         self.figura.clear() # Refresca el gráfico
