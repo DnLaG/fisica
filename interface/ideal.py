@@ -356,7 +356,7 @@ class Interface:
         pass
 
     def boton_vector_normalf(self):
-        tiempofinal= 5
+        tiempofinal= 6
         xo = 0
         yo = 0
         vxo = 15
