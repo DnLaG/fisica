@@ -356,19 +356,37 @@ class Interface:
         pass
 
     def boton_vector_normalf(self):
-        tiempofinal= 10
-        xo = 0
-        yo = 0
+        Pop_Up = tk.Tk()
+        Pop_Up.title("Rango Tiempo")
+        Pop_Up.minsize(400, 300)
+        L1 = tk.Label(Pop_Up, text="Eliga Tiempo a Evaluar")
+        E1 = tk.Entry(Pop_Up, bd=5)
+        E1.pack()
+        L1.pack()
+        label = tk.Label(Pop_Up)
+        label.pack()
+
+        button = ttk.Button(Pop_Up, text='Evaluar', width=10, command=Pop_Up.destroy)
+
+        button.pack(side=tk.BOTTOM)
+
+        #  inicializa la ventana popup
+        tiempofinal= 20
+        xo = int(self.entrada_posicion_x0.get())
+        yo = int(self.entrada_posicion_y0.get())
         vxo = 15
         vyo = 90
+        angulo_inicial =self.entrada_angulo_inicial.get()
         plt.title("Vector Normal")
         plt.xlabel("-X-")
         plt.ylabel("-Y-")
         x = np.arange(0, tiempofinal, 0.001)
-        x1 = 1
-        h = math.sin(math.degrees(60))
-        j = math.cos(math.degrees(60))
+        print(E1.get())
+        x1 = 5
+        h = math.sin(math.degrees(int(angulo_inicial)))
+        j = math.cos(math.degrees(int(angulo_inicial)))
         print (h)
+        x1=2
         y = yo + vyo * x + (1 / 2) * -9.8 * x ** 2
         z = xo + vxo * x + (1 / 2) * 0 * x ** 2
         y1 = yo + vyo * x1 + (1 / 2) * -9.8 * x1 ** 2
