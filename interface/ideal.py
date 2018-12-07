@@ -465,6 +465,30 @@ class Interface:
         pass
 
     def boton_vector_normalf(self):
+        tiempofinal= 10
+        xo = 0
+        yo = 0
+        vxo = 15
+        vyo = 90
+        plt.title("Vector Normal")
+        plt.xlabel("-X-")
+        plt.ylabel("-Y-")
+        x = np.arange(0, tiempofinal, 0.001)
+        x1 = 1
+        h = math.sin(math.degrees(60))
+        j = math.cos(math.degrees(60))
+        print (h)
+        y = yo + vyo * x + (1 / 2) * -9.8 * x ** 2
+        z = xo + vxo * x + (1 / 2) * 0 * x ** 2
+        y1 = yo + vyo * x1 + (1 / 2) * -9.8 * x1 ** 2
+        z1 = xo + vxo * x1 + (1 / 2) * 0 * x1 ** 2
+        vector_velocidadx= (vxo*x1)
+        vector_velocidady = (vyo * h-(9.8*x1))
+        plt.plot(z, y,"-")
+        plt.plot(vector_velocidadx+z1, vector_velocidady+y1, "-o")
+        plt.plot((vector_velocidady+z1), (vector_velocidadx), "-o")
+        plt.plot(z1, y1, "-o")
+        plt.show()
         pass
     def actualizar_grafico(self,ecuacion_x,ecuacion_y):
         self.figura.clear() # Refresca el gráfico
