@@ -13,8 +13,8 @@ class Interface:
         # Valores Iniciales
         self.gravedad = 9.8
         self.velocidad_inicial = 10
-        self.angulo = np.radians(2)
-        self.x0 = 5
+        self.angulo = np.radians(10)
+        self.x0 = 7
         self.y0 = 8
         self.z0 = 0
         self.window = tk.Tk()
@@ -295,13 +295,37 @@ class Interface:
         pass
 
     def boton_aceleracionf(self):
-        #pop up de ingreso de datos
 
-        #funcion para la obtencion de tiempo impacto final
+            #funcion para la obtencion de tiempo impacto final
         def time_impact(self):
+            t = ((self.velocidad_inicial*sin(self.angulo))/(2* self.gravedad))+ ((1/self.gravedad)*(sqrt(((self.velocidad_inicial*sin(self.angulo))**2)+(2*self.y0*self.gravedad))))
+            print(t)
+            return t
 
-            return 2.7
+            # funcion para el calculo de la coordenada horizontal
+        def cord_x(self, t):
+            x = self.x0 + ((self.velocidad_inicial * cos(self.angulo)) * t)
+            return x
 
+            # funcion para el calculo de la coordenada vertical
+        def cord_y(self, t):
+            y = self.y0 + (((self.velocidad_inicial * (cos(self.angulo))) * t) - ((self.gravedad / 2) * (t ** 2)))
+            return y
+
+            # funcion altura maxima para graficar
+        def altura_max(self):
+            r = self.y0+ (((self.velocidad_inicial * (sin(self.angulo)))**2)/(2*self.gravedad))
+            return r
+
+            # funcion alcance maximo para graficar
+        def alcance_max(self):
+            alc = self.x0 + ((self.velocidad_inicial*sin(2*self.angulo))/(2*self.gravedad)) + \
+                             ((self.velocidad_inicial*cos(self.angulo)) /
+                              (self.gravedad))*sqrt(((self.velocidad_inicial*sin(self.angulo))**2) + 2*self.y0*self.gravedad)
+            return alc
+
+
+            # pop up de ingreso de datos
         Pop_Up = tk.Tk()
         Pop_Up.title("Aceleracion")
         Pop_Up.minsize(400,300)
@@ -311,33 +335,42 @@ class Interface:
 
         button = ttk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
         button.pack(side=tk.BOTTOM)
-
-        # funcion para el calculo de la coordenada horizontal
-        def cord_x(self, t):
-            x = self.x0 + ((self.velocidad_inicial * cos(self.angulo)) * t)
-            return x
-
-        # funcion para el calculo de la coordenada vertical
-        def cord_y(self, t):
-            y = self.y0 + (((self.velocidad_inicial * (cos(self.angulo))) * t) - ((self.gravedad / 2) * (t ** 2)))
-            return y
+        time_usuario = 1 #tiempo ingresado por el usuario(temporal)
 
         # generamiento de la grafica
 
-        t = time_impact(self)
-        time = np.arange(0,t,0.01)
+            #generacion de la grafica del tiempo ingresado
+        time = np.arange(0,time_usuario,0.01)
         x = cord_x(self, time)
         y = cord_y(self, time)
-        mpl.plot(x,y,"r--")
+
+            #grafica completa del lanzamiento
+        time_complete = np.arange(0,time_impact(self)+4, 0.01)
+        x2 = cord_x(self, time_complete)
+        y2 = cord_y(self, time_complete)
+
+            #generacion del punto de posicion a medir
+        x3 = cord_x(self, time_usuario)
+        y3 = cord_y(self, time_usuario)
+
+            #estetica de la grafica
+        mpl.title("Aceleracion")
+        mpl.xlim(0,alcance_max(self)+self.x0)
+        mpl.ylim(0,altura_max(self)+self.y0)
+        mpl.xlabel("-Distancia-")
+        mpl.ylabel("-Altura-")
+
+            #generamiento de las curvas
+        mpl.plot(self.x0, self.y0, "k-o")#punto pos inicial
+        mpl.plot(x,y,"y-")#curva del usuario
+        mpl.plot(x2,y2,"k--")#lanzamiento completo
+        mpl.plot(x3, y3, "r-o")#punto del usuario
+        mpl.grid()#cuadriculado
+
+            #generacion del vector con origen en el punto de posicion
+        mpl.plot()
         mpl.show()
-
-        #generacion del punto de posicion a medir
-
-
-        #generacion del vector con origen en el punto de posicion
-
-
-        #posible desplazamiento con deslizador
+        #posible desplazamiento con
         pass
 
     def boton_alcance_horizontalf(self):
