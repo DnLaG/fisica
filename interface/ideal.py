@@ -2,8 +2,9 @@ import tkinter as tk # ejecutar "sudo apt-get install python3-tk" si hay problem
 from tkinter import ttk
 import numpy as np
 from numpy import *
-import matplotlib as mpl
+import math
 import matplotlib.pyplot as mpl
+import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -91,7 +92,7 @@ class Interface:
                 self.entrada_posicion_y0.delete(0,'end')
 
         def limpiar_entrada_angulo(event):
-            if self.entrada_angulo_inicial.get() == "Angulo":
+            if self.entrada_angulo_inicial.get() == "Angulo Inicial":
                 self.entrada_angulo_inicial.delete(0,'end')
 
         def limpiar_entrada_Rapidez(event):
@@ -190,9 +191,9 @@ class Interface:
         self.deslizador_posicion_y0.bind("<B1-Motion>", f_posicion_y0)
         self.deslizador_posicion_y0.bind("<ButtonRelease-1>", f_posicion_y0)
 
-        self.deslizador_angulo_inicial = ttk.Scale(angulo, variable=angulo_inicial, from_=0, to=90, orient=tk.HORIZONTAL)
+        self.deslizador_angulo_inicial = ttk.Scale(angulo, variable=angulo_inicial, from_=0, to=89, orient=tk.HORIZONTAL)
         self.deslizador_angulo_inicial.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
-        self.deslizador_angulo_inicial.set(180)
+        self.deslizador_angulo_inicial.set(50)
         self.deslizador_angulo_inicial.bind("<B1-Motion>", f_angulo_inicial)
 
         self.deslizador_Rapidez_inicial = ttk.Scale(Rapidez, variable=Rapidez_inicial, from_=0, to=100, orient=tk.HORIZONTAL)
@@ -458,53 +459,46 @@ class Interface:
         pass
 
     def boton_alcance_horizontalf(self):
-        # Metodo para almacenar datos de las entradas de datos
-        def datos(event):
-            self.posicion_datos[0] = entrada_x.get()
-            self.posicion_datos[1] = entrada_y.get()
-            master.destroy()
 
-        # Metodo para validar la entrada de datos (Solo Numeros por ahora)
-        def check(v, p):
-            if p.isdigit():
-                return True
-            elif p is "":
-                return True
-            else:
-                return False
+        # __Variables necesarias para conseguir R (alcance horizontal)__ #
+        xi = int(self.entrada_posicion_x0.get())
+        yi = int(self.entrada_posicion_y0.get())
+        v0 = int(self.entrada_Rapidez_inicial.get())
+        angulo0 = math.radians(int(self.entrada_angulo_inicial.get()))
+        coseno = math.cos(angulo0)
+        seno = math.sin(angulo0)
+        vxo = v0 * coseno
+        vyo = v0 * seno
+        g = 9.8
+        time = ((v0 * seno) / (2 * g)) + ((1 / g) * (sqrt(((v0 * seno) ** 2) + (2 * int(self.entrada_posicion_y0.get())*g))))
+        altura = int(self.entrada_posicion_y0.get()) + (((v0 * seno) ** 2) / (2 * g))
 
-        #  inicializa la ventana popup
-        master = tk.Tk()
-        master.title("Alcance Horizontal")
+        # __Ecuacion dividida en 4 partes para conseguir R__ #
+        R1 = (math.pow(v0, 2) * math.sin(2*angulo0)) / (2 * g)
+        R2 = (v0 * coseno) / g
+        R3 = np.sqrt((math.pow((v0 * seno), 2)) + (2 * yi * g))
+        R = xi + R1 + R2 * R3
 
-        # Crea un frame contenedor para la izquierda y la derecha
-        frame_izquierda = ttk.Frame(master)
-        frame_derecha = ttk.Frame(master)
-        frame_aceptar = ttk.Frame(master)
-        validacion_x = (frame_izquierda.register(check), '%v', '%P')
-        validacion_y = (frame_derecha.register(check), '%v', '%P')
+        imprimir = ("{0:.2f}".format(R))   # Imprimir guarda el resultado final (R) y lo deja con solo dos decimales
+        print("R = ", R)   # print de control
 
-        frame_izquierda.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        frame_derecha.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        # __Estetica de la grafica__ #
+        mpl.suptitle('Alcance Horizontal:', fontsize=22)
+        mpl.subplots_adjust(top=0.80)
+        mpl.title(R, fontsize=18, color='C3')
+        mpl.xlim(0, R + 2)
+        mpl.ylim(-0.03, altura + 2)
+        mpl.xlabel("X(m)")
+        mpl.ylabel("Y(m)")
 
-        # Crea las titulos de la entrada de datos
-        Dato_1 = ttk.Label(frame_izquierda, text="Dato 1: ")
-        Dato_2 = ttk.Label(frame_derecha, text="Dato 2: ")
-        aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
-
-        # Crea formularios para entrada de datos
-        entrada_x = ttk.Entry(frame_izquierda, validate="key", validatecommand=validacion_x)
-        entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
-
-        Dato_1.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        Dato_2.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-        entrada_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        aceptar.pack(fill=tk.BOTH, expand=1)
-        aceptar.bind("<Button-1>", datos)
-
+        # __Dibujado de la curva__ #
+        x = np.arange(0, time+3, 0.001)
+        c_y = yi + vyo * x + (1 / 2) * -9.8 * x ** 2      # Ecuacion de lanzamiento de proyectil
+        c_x = xi + vxo * x + (1 / 2) * 0 * x ** 2     # Ecuacion de lanzamiento de proyectil
+        mpl.plot(c_x, c_y, "-")  # lanzamiento completo
+        plt.plot(R, 0, "ro")
+        mpl.show()
+        pass
 
     def boton_altura_maximaf(self):
         pass
