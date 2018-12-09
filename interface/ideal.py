@@ -293,9 +293,93 @@ class Interface:
         aceptar.bind("<Button-1>", copiar_valores)
 
     def boton_velocidadf(self):
+        import matplotlib.pyplot as plt
+        import math
+
+        def seno(Grado):
+            # funcion para calcualar el seno de un angulo
+            # transforma el angulo a radianes para la funcion sin
+            return math.sin(math.radians(Grado))
+
+        def coseno(Grado):
+            # funcion para calcualar el seno de un angulo
+            # transforma el angulo a radianes para la funcion sin
+            return math.cos(math.radians(Grado))
+
+        def Ingreso_De_Datos():
+            # funcion que recibe y retorna los valores para reemplazar en la ecuacion.
+            V_inicial = int(input("Velocidad inicial: "))
+            Angulo = int(input("Angulo de inclinación:"))
+            Aceleracion = int(input("Aceleracion: "))
+            Tiempo = int(input("Tiempo: "))
+            # retorn de los datos leidos  por teclado.
+            return V_inicial, Angulo, Aceleracion, Tiempo
+
+        def Vector_Velocidad(v0, O, a, t):
+            # funcion que calcula el vector velocidad
+            # como parametro recibe los valores de velocidad,angulo,aceleracion y tiempo.
+            Vt = []
+            Vx = v0 * (coseno(O))
+            Vy = v0 * (seno(O)) - a * t
+            # se añaden la velocidad en X e Y al vector Vt.
+            Vt.append(Vx)
+            Vt.append(Vy)
+            return Vt
+
+        def Grafica_Velocidad(Vt):
+            # funcion para graficar el vector velocidad.
+            plt.plot(Vt, "r-")
+            plt.show()
+
+        def Mostrar_Vector(Vt):
+            # muestra el vector velocidad por consola.
+            print(Vt[0], ",", Vt[1])
+
+        if __name__ == "__main__":
+            V_Inicial, Angulo, Aceleracion, Tiempo = Ingreso_De_Datos()
+            Velocidad = Vector_Velocidad(V_Inicial, Angulo, Aceleracion, Tiempo)
+            Mostrar_Vector(Velocidad)
+            Grafica_Velocidad(Velocidad)
+
+
         pass
 
     def boton_aceleracionf(self):
+        # pop up de ingreso de datos
+
+        # funcion de tiempo de impacto
+        def tiempo_impact():
+            return 0
+
+        # pop up
+
+        Pop_Up = tk.Tk()
+        Pop_Up.title("Aceleracion")
+        Pop_Up.minsize(400, 300)
+
+        label = tk.Label(Pop_Up)
+        label.pack()
+
+        #crear frame contenedor
+
+        # Separador de datos
+        separador = ttk.Separator(Pop_Up, orient="horizontal")
+        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
+
+        e = ttk.Entry(Pop_Up)
+        e.pack(side=tk.BOTTOM, expand=True)
+
+        button = ttk.Button(Pop_Up, text='Evaluar', width=10, command=Pop_Up.destroy)
+        button.pack(side=tk.BOTTOM, padx=5, pady=5)
+
+        Pop_Up.mainloop()
+
+        # formulas de generamiento de datos a graficar
+        # funcion para el calculo de la coordenada horizontal
+        # generamiento de la grafica
+        # generacion del punto de posicion a medir
+        # generacion del vector con origen en el punto de posicion
+        # posible desplazamiento con deslizador
 
             #funcion para la obtencion de tiempo impacto final
         def time_impact(self):
@@ -399,12 +483,81 @@ class Interface:
         pass
 
     def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
+        # DATOS DE PRUEBA
+
+        ang=np.pi/3
+        g = 10
+        t = 1
+        v0=150
+        x0=10
+        x=0
+
+        ##################
+        # ECUACIONES
+
+        curvatura_pos = (np.abs(-g/(np.power(v0*np.cos(ang),2)))/(np.power(1+np.power(np.tan(ang)-g/np.power(v0*np.cos(ang),2)*(x-x0),2),3/2)))
+        curvatura_t = (np.abs(-(g)/np.power(v0*np.cos(ang),2))/np.power(1+np.power(np.tan(ang)-(g/v0*np.cos(ang)*t),2),3/2))
+        r_curvatura_pos = ((np.power(1+np.power(np.tan(ang)-g/(np.power(v0*np.cos(ang),2)*(x-x0)),2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
+        r_curvatura_t = ((np.power(1+np.power(np.tan(ang)-g/v0*np.tan(ang)*t,2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
+        centro_cuvatura_x=x-(((np.tan(ang)-(g/np.power(v0*np.cos(ang),2))*(x-x0))*(1+np.power(np.tan(ang)-(g/np.power(v0*np.cos(ang)*(x-x0),2)),2)))/(-g/np.power(v0*np.cos(ang),2)))
+        #centro_curvatura_y=
+        print("Curvatura en tiempo X: "+str(curvatura_t))
+        print("Curvatura en posicion: "+str(curvatura_pos))
+        print("Radio en posicion: "+str(r_curvatura_pos))
+        print("Radio en tiempo X:"+str(r_curvatura_t))
+        print("Centro de curvatura pos x:" +str(centro_cuvatura_x))
+
+        ##################
+
+        # TEST DRAW #
         pass
 
     def boton_aceleracion_normal_y_tangencialf(self):
         pass
 
     def boton_vector_normalf(self):
+        Pop_Up = tk.Tk()
+        Pop_Up.title("Rango Tiempo")
+        Pop_Up.minsize(400, 300)
+        L1 = tk.Label(Pop_Up, text="Eliga Tiempo a Evaluar")
+        E1 = tk.Entry(Pop_Up, bd=5)
+        E1.pack()
+        L1.pack()
+        label = tk.Label(Pop_Up)
+        label.pack()
+
+        button = ttk.Button(Pop_Up, text='Evaluar', width=10, command=Pop_Up.destroy)
+
+        button.pack(side=tk.BOTTOM)
+
+        #  inicializa la ventana popup
+        tiempofinal= 20
+        xo = int(self.entrada_posicion_x0.get())
+        yo = int(self.entrada_posicion_y0.get())
+        vxo = 15
+        vyo = 90
+        angulo_inicial =self.entrada_angulo_inicial.get()
+        plt.title("Vector Normal")
+        plt.xlabel("-X-")
+        plt.ylabel("-Y-")
+        x = np.arange(0, tiempofinal, 0.001)
+        print(E1.get())
+        x1 = 5
+        h = math.sin(math.degrees(int(angulo_inicial)))
+        j = math.cos(math.degrees(int(angulo_inicial)))
+        print (h)
+        x1=2
+        y = yo + vyo * x + (1 / 2) * -9.8 * x ** 2
+        z = xo + vxo * x + (1 / 2) * 0 * x ** 2
+        y1 = yo + vyo * x1 + (1 / 2) * -9.8 * x1 ** 2
+        z1 = xo + vxo * x1 + (1 / 2) * 0 * x1 ** 2
+        vector_velocidadx= (vxo*x1)
+        vector_velocidady = (vyo * h-(9.8*x1))
+        plt.plot(z, y,"-")
+        plt.plot(vector_velocidadx+z1, vector_velocidady+y1, "-o")
+        plt.plot((vector_velocidady+z1), (vector_velocidadx), "-o")
+        plt.plot(z1, y1, "-o")
+        plt.show()
         pass
     def actualizar_grafico(self,ecuacion_x,ecuacion_y):
         self.figura.clear() # Refresca el gráfico
