@@ -4,6 +4,7 @@ import numpy as np
 from numpy import *
 import matplotlib as mpl
 import matplotlib.pyplot as mpl
+from matplotlib import collections  as mc
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -325,51 +326,66 @@ class Interface:
             return alc
 
 
-            # pop up de ingreso de datos
-        Pop_Up = tk.Tk()
-        Pop_Up.title("Aceleracion")
-        Pop_Up.minsize(400,300)
+        # pop up de ingreso de datos
 
-        label = tk.Label(Pop_Up)
-        label.pack()
+        raiz = tk.Tk() #se crea la raiz del pop-up
+        raiz.title("ingrese tiempo para medir") #se cambia el titulo de la ventana
+        raiz.resizable(False,False)#se bloquea el pop-up para que no lo puedan extender
+        frame= ttk.Frame(raiz, width=300 , height=300 ) #se genera el frame
+        frame.pack() #se empaqueta a la raiz
 
-        button = ttk.Button(Pop_Up, text = 'Evaluar' , width = 10, command = Pop_Up.destroy)
-        button.pack(side=tk.BOTTOM)
-        time_usuario = 1 #tiempo ingresado por el usuario(temporal)
+        ttk.Label(frame, text = "El intervalo de tiempo es: ").place(x=60, y=10) #se define el label de titulo
+        ttk.Label(frame, text = "inicio: 0").place(x= 50, y = 60)#se define el valor de inicio del intervalo
+        ttk.Label(frame, text = "final: "+str(time_impact(self))).place(x= 150, y = 60)#se define el valor final del intervalo dado por t
+        ttk.Label(frame, text = "ingrese el tiempo a graficar: ").place(x= 50,y = 120)#titulo que indica ingresar tiempo
+
+        ttk.Label(frame, text = "->").place(x= 30, y =170)#flecha direccion
+        ttk.Label(frame, text = "seg").place(x= 230, y=170)#unidad de medida de seg que aparece al lado del cuadro de texto
+        cuadroTexto = ttk.Entry(raiz).place(x= 60, y = 170)#cuadro de texto para ingresar
+
+        botonEvaluar = ttk.Button(raiz, text= "evaluar", command= GraficarFuncion(self)).place(x= 105, y= 220)
+
+
+        raiz.mainloop() 
 
         # generamiento de la grafica
 
-            #generacion de la grafica del tiempo ingresado
-        time = np.arange(0,time_usuario,0.01)
-        x = cord_x(self, time)
-        y = cord_y(self, time)
+        def GraficarFuncion(self):
+                #generacion de la grafica del tiempo ingresado
+            time = np.arange(0,time_usuario,0.01)
+            x = cord_x(self, time)
+            y = cord_y(self, time)
 
-            #grafica completa del lanzamiento
-        time_complete = np.arange(0,time_impact(self)+4, 0.01)
-        x2 = cord_x(self, time_complete)
-        y2 = cord_y(self, time_complete)
+                #grafica completa del lanzamiento
+            time_complete = np.arange(0,time_impact(self)+4, 0.01)
+            x2 = cord_x(self, time_complete)
+            y2 = cord_y(self, time_complete)
 
-            #generacion del punto de posicion a medir
-        x3 = cord_x(self, time_usuario)
-        y3 = cord_y(self, time_usuario)
+                #generacion del punto de posicion a medir
+            x3 = cord_x(self, time_usuario)
+            y3 = cord_y(self, time_usuario)
 
-            #estetica de la grafica
-        mpl.title("Aceleracion")
-        mpl.xlim(0,alcance_max(self)+self.x0)
-        mpl.ylim(0,altura_max(self)+self.y0)
-        mpl.xlabel("-Distancia-")
-        mpl.ylabel("-Altura-")
 
-            #generamiento de las curvas
-        mpl.plot(self.x0, self.y0, "k-o")#punto pos inicial
-        mpl.plot(x,y,"y-")#curva del usuario
-        mpl.plot(x2,y2,"k--")#lanzamiento completo
-        mpl.plot(x3, y3, "r-o")#punto del usuario
-        mpl.grid()#cuadriculado
+                #estetica de la grafica
+            mpl.title("Aceleracion")
+            mpl.xlim(0,alcance_max(self)+self.x0)
+            mpl.ylim(0,altura_max(self)+self.y0)
+            mpl.xlabel("-Distancia-")
+            mpl.ylabel("-Altura-")
 
-            #generacion del vector con origen en el punto de posicion
-        mpl.plot()
-        mpl.show()
+                #generamiento de las curvas
+            mpl.plot(self.x0, self.y0, "k-o")#punto pos inicial
+            mpl.plot(x,y,"y-")#curva del usuario
+            mpl.plot(x2,y2,"k--")#lanzamiento completo
+            mpl.plot(x3, y3, "r-o")#punto del usuario
+            mpl.grid()#cuadriculado
+
+                #generacion del vector con origen en el punto de posicion
+            mpl.plot(x3,y3-time_impact(self) ,"g-o")
+
+            mpl.show()
+            return 0
+
         #posible desplazamiento con
         pass
 
