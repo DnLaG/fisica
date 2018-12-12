@@ -14,10 +14,10 @@ class Interface:
     def __init__(self):
         # Valores Iniciales
         self.gravedad = 9.8
-        self.velocidad_inicial = 10
-        self.angulo = np.radians(10)
-        self.x0 = 7
-        self.y0 = 8
+        self.velocidad_inicial = 2
+        self.angulo = np.radians(45)
+        self.x0 = 0
+        self.y0 = 0
 #<<<<<<< Updated upstream
         self.z0 = 0
 #=======
@@ -506,53 +506,41 @@ class Interface:
         pass
 
     def boton_altura_maximaf(self):
-#<<<<<<< Updated upstream
+        #ecuacion de altura maxima
         x0 = self.x0
         y0 = self.y0
         angulo_inicial = self.angulo
         v_inicial = self.velocidad_inicial
-        arriba = pow((v_inicial * sin(angulo_inicial)), 2)
-#=======
-#<<<<<<< Updated upstream
-        arriba = pow((self.velocidad_inicial * sin(self.angulo)), 2)
-#>>>>>>> Stashed changes
-        result = (arriba / (2 * 9.8))
-        result = result + y0
-        print(result)
-
+        arriba = pow((v_inicial * sin(angulo_inicial)), 2) #la parte de arriba de la fraccion
+        result = (arriba / (2*9.8)) #La parte de abajo de la ecuacion
+        result = result + y0 # lo sumar la posicion incicial del eje y
+        final = round(result,5)
         def copiar_valores(event):
             master.destroy()
 
-        def check(v, p):
-            if p.isdigit():
-                return True
-            elif p is "":
-                return True
-            else:
-                return False
-
         master = tk.Tk()
         master.title("Altura Maxima")
-        frame_izquierda = ttk.Frame(master)
-        frame_derecha = ttk.Frame(master)
+
+        # Crea un frame contenedor para la izquierda y la derecha
+        frame_arriba = ttk.Frame(master)
+        frame_abajo = ttk.Frame(master)
         frame_aceptar = ttk.Frame(master)
-        validacion_x = (frame_izquierda.register(check), '%v', '%P')
-        validacion_y = (frame_derecha.register(check), '%v', '%P')
-        frame_izquierda.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        frame_derecha.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_arriba.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_abajo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
         frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        posicion_x = ttk.Label(frame_izquierda, text="Posicion inicial de X: ")
-        posicion_y = ttk.Label(frame_derecha, text="Posicion inicial de Y: ")
+
+        # Crea las titulos de la entrada de datos
         aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
-        entrada_x = ttk.Entry(frame_izquierda, validate="key", validatecommand=validacion_x)
-        entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
-        posicion_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        entrada_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init = ttk.Label(frame_arriba, text="Altura maxima: ")
+        tiempo_init_x = ttk.Entry(frame_arriba, state='readonly', justify='center')
+        tiempo_init.pack(side=tk.TOP)
+        tiempo_init_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_x.configure(state='normal')
+        tiempo_init_x.delete(0, 'end')
+        tiempo_init_x.insert(0, final)
+        tiempo_init_x.configure(state='readonly')
         aceptar.pack(fill=tk.BOTH, expand=1)
         aceptar.bind("<Button-1>", copiar_valores)
-        pass
 
     def boton_camino_recorridof(self):
         pass
