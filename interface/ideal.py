@@ -540,6 +540,14 @@ class Interface:
         pass
 
     def boton_vector_normalf(self):
+        velocidad = int(self.entrada_Rapidez_inicial.get())
+        angulo_inicial = int(self.entrada_angulo_inicial.get())
+        nose=(self.gravedad*int(self.entrada_posicion_y0.get())/math.pow(velocidad,2))
+        tiempo_maximov1=(velocidad/self.gravedad)*((math.sin(math.radians(angulo_inicial)))+math.sqrt(math.pow(math.sin(math.radians(angulo_inicial)),2)+2*nose))
+        tiempo_maximo=tiempo_maximov1
+        print (tiempo_maximov1)
+
+
         Pop_Up = tk.Tk()
         Pop_Up.title("Rango Tiempo")
         Pop_Up.minsize(400, 300)
@@ -553,24 +561,18 @@ class Interface:
         button = ttk.Button(Pop_Up, text='Evaluar', width=10, command=Pop_Up.destroy)
 
         button.pack(side=tk.BOTTOM)
-
         #  inicializa la ventana popup
-        tiempofinal= 20
         xo = int(self.entrada_posicion_x0.get())
         yo = int(self.entrada_posicion_y0.get())
-        vxo = 15
-        vyo = 90
-        angulo_inicial =self.entrada_angulo_inicial.get()
+        vxo = velocidad * math.cos(math.radians(angulo_inicial))
+        vyo = velocidad * math.sin(math.radians(angulo_inicial))
         plt.title("Vector Normal")
         plt.xlabel("-X-")
         plt.ylabel("-Y-")
-        x = np.arange(0, tiempofinal, 0.001)
-        print(E1.get())
-        x1 = 5
-        h = math.sin(math.degrees(int(angulo_inicial)))
-        j = math.cos(math.degrees(int(angulo_inicial)))
-        print (h)
-        x1=2
+        x = np.arange(0, tiempo_maximo, 0.001)
+        x1 = 3
+        h = math.sin(math.radians(int(angulo_inicial)))
+        j = math.cos(math.radians(int(angulo_inicial)))
         y = yo + vyo * x + (1 / 2) * -9.8 * x ** 2
         z = xo + vxo * x + (1 / 2) * 0 * x ** 2
         y1 = yo + vyo * x1 + (1 / 2) * -9.8 * x1 ** 2
@@ -582,6 +584,7 @@ class Interface:
         plt.plot((vector_velocidady+z1), (vector_velocidadx), "-o")
         plt.plot(z1, y1, "-o")
         plt.show()
+
         pass
     def actualizar_grafico(self,ecuacion_x,ecuacion_y):
         self.figura.clear() # Refresca el gráfico
