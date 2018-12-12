@@ -483,14 +483,36 @@ class Interface:
         pass
 
     def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
+        def check(v, p):
+            if p.isdigit():
+                return True
+            elif p is "":
+                return True
+            else:
+                return False
+
+        def time_impact(self):
+            t = ((self.velocidad_inicial * sin(self.angulo)) / (self.gravedad)) + ((1 / self.gravedad) * (
+            sqrt(((self.velocidad_inicial * sin(self.angulo)) ** 2) + (2 * self.y0 * self.gravedad))))
+            print(t)
+            return t
+        def copiar_valores(event):
+            self.tiempo_datos[0] = entrada_tiempo.get()
+            master.destroy()
+
+        ###### TEST PRINT DATOS
+        print(self.tiempo_datos)
+        print("TIEMPO DATOS")
+
         # DATOS DE PRUEBA
 
-        ang=np.pi/3
-        g = 10
-        t = 1
-        v0=150
-        x0=10
-        x=0
+        ang=np.pi/3 # REEMPLAZAR POR self.angulo_inicial ?
+        g = 10  # Constante
+        t = 1   # Este parametro se toma desde la ventana generada
+        v0=150  # REEMPLAZAR POR self.velocidad_inicial ?
+        x0=10   # ---------^
+        x=0     # Este parametro se toma desde la ventana generada
+        y=0     # ---------^
 
         ##################
         # ECUACIONES
@@ -510,6 +532,55 @@ class Interface:
         ##################
 
         # TEST DRAW #
+        master = tk.Tk()
+        master.title("Posicion")
+        # Crea un frame contenedor para la izquierda y la derecha
+        frame_arriba = ttk.Frame(master)
+        frame_centro = ttk.Frame(master)
+        frame_abajo = ttk.Frame(master)
+        frame_aceptar = ttk.Frame(master)
+        validacion_tiempo = (frame_abajo.register(check), '%v', '%P')
+        # validacion_y = (frame_derecha.register(check), '%v', '%P')
+
+        frame_arriba.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_centro.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_abajo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        # Crea las titulos de la entrada de datos
+        tiempo = ttk.Label(frame_abajo, text="Tiempo: ")
+        tiempo_init = ttk.Label(frame_arriba, text="Intervalo de tiempo")
+        tiempo_init_x = ttk.Entry(frame_arriba, state='readonly', justify='center')
+        tiempo_init_y = ttk.Entry(frame_arriba, state='readonly')
+        tiempo_init.pack(side=tk.TOP)
+        tiempo_init_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_x.configure(state='normal')
+        tiempo_init_x.delete(0, 'end')
+        tiempo_init_x.insert(0, "0")
+        tiempo_init_x.configure(state='readonly')
+        # inicializa el punto de interseccion del eje Y
+        tiempo_init_y.configure(state='normal')
+        tiempo_init_y.delete(0, 'end')
+        tiempo_init_y.insert(0, time_impact(self))
+        tiempo_init_y.configure(state='readonly')
+
+        # Separador de datos
+        separador = ttk.Separator(frame_centro, orient="horizontal")
+        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
+        # Crea formularios para entrada de datos
+        entrada_tiempo = ttk.Entry(frame_abajo, validate="key", validatecommand=validacion_tiempo)
+        # entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
+
+        tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        # posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        entrada_tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        # entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
+        aceptar.pack(fill=tk.BOTH, expand=1)
+        aceptar.bind("<Button-1>", copiar_valores)
+
         pass
 
     def boton_aceleracion_normal_y_tangencialf(self):
