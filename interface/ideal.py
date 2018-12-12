@@ -16,7 +16,11 @@ class Interface:
         self.angulo = np.radians(2) #2pi
         self.x0 = 5
         self.y0 = 8
+#<<<<<<< Updated upstream
         self.z0 = 0
+#=======
+#>>>>>>> Stashed changes
+#>>>>>>> Stashed changes
         self.window = tk.Tk()
         self.window.title("Fisica")
         self.window.minsize(800, 600)
@@ -326,11 +330,16 @@ class Interface:
         pass
 
     def boton_altura_maximaf(self):
-        x0 = self.entrada_posicion_x0.get()
-        y0 = self.entrada_posicion_y0.get()
-        angulo_inicial = self.entrada_angulo_inicial.get()
-        v_inicial = self.entrada_Rapidez_inicial.get()
+#<<<<<<< Updated upstream
+        x0 = self.x0
+        y0 = self.y0
+        angulo_inicial = self.angulo
+        v_inicial = self.velocidad_inicial
         arriba = pow((v_inicial * sin(angulo_inicial)), 2)
+#=======
+#<<<<<<< Updated upstream
+        arriba = pow((self.velocidad_inicial * sin(self.angulo)), 2)
+#>>>>>>> Stashed changes
         result = (arriba / (2 * 9.8))
         result = result + y0
         print(result)
