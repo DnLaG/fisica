@@ -546,33 +546,14 @@ class Interface:
         pass
 
     def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
-        def check(v, p):
-            if p.isdigit():
-                return True
-            elif p is "":
-                return True
-            else:
-                return False
-        def time_impact(self):
-            t = ((self.velocidad_inicial * sin(self.angulo)) / (self.gravedad)) + ((1 / self.gravedad) * (
-            sqrt(((self.velocidad_inicial * sin(self.angulo)) ** 2) + (2 * self.y0 * self.gravedad))))
-            return round(t,2)
-        def validarIntervaloTiempo(valor):
-            return (valor>0 &valor<=time_impact(self))
-        """def radioButtons():
-            print(v.get())
-            return v.get()
-        """
         # DATOS DE PRUEBA
 
-        ang=np.pi/3 # REEMPLAZAR POR self.angulo_inicial ?
-        g = 10  # Constante
-        t = 1   # Este parametro se toma desde la ventana generada
-        v0=150  # REEMPLAZAR POR self.velocidad_inicial ?
-        x0=10   # ---------^
-        y0=20   #
-        x=0     # Este parametro se toma desde la ventana generada
-        y=0     # ---------^
+        ang=np.pi/3
+        g = 10
+        t = 1
+        v0=150
+        x0=10
+        x=0
 
         ##################
         # ECUACIONES
@@ -581,98 +562,19 @@ class Interface:
         curvatura_t = (np.abs(-(g)/np.power(v0*np.cos(ang),2))/np.power(1+np.power(np.tan(ang)-(g/v0*np.cos(ang)*t),2),3/2))
         r_curvatura_pos = ((np.power(1+np.power(np.tan(ang)-g/(np.power(v0*np.cos(ang),2)*(x-x0)),2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
         r_curvatura_t = ((np.power(1+np.power(np.tan(ang)-g/v0*np.tan(ang)*t,2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
-        centro_curvatura_x=x-(((np.tan(ang)-(g/np.power(v0*np.cos(ang),2))*(x-x0))*(1+np.power(np.tan(ang)-(g/np.power(v0*np.cos(ang)*(x-x0),2)),2)))/(-g/np.power(v0*np.cos(ang),2)))
+        centro_cuvatura_x=x-(((np.tan(ang)-(g/np.power(v0*np.cos(ang),2))*(x-x0))*(1+np.power(np.tan(ang)-(g/np.power(v0*np.cos(ang)*(x-x0),2)),2)))/(-g/np.power(v0*np.cos(ang),2)))
         #centro_curvatura_y=
-        centro_curvatura_xt= x0+v0*cos(ang)*t + (((1+tan(ang)-(g/v0*cos(ang))*t)*(1+np.power(tan(ang)- (g/v0*cos(ang))*t,2))) / (g/np.power(v0*cos(ang),2)))
-        centro_curvatura_yt=y0+v0*sin(ang)*t-(1+np.power(tan(ang)-(g/v0*cos(ang))*t,2)*np.power(v0*cos(ang),2)/g)
-        """
         print("Curvatura en tiempo X: "+str(curvatura_t))
         print("Curvatura en posicion: "+str(curvatura_pos))
         print("Radio en posicion: "+str(r_curvatura_pos))
         print("Radio en tiempo X:"+str(r_curvatura_t))
-        print("Centro de curvatura pos x:" +str(centro_curvatura_x))
-        print("Centro de curvatura X en T1:" + str(centro_curvatura_xt))
-        print("Centro de curvatura Y en T1" + str(centro_curvatura_yt))
-        """
+        print("Centro de curvatura pos x:" +str(centro_cuvatura_x))
+
         ##################
 
-        # Crear POPUP NUEVO #
-        popup = tk.Tk()
-        popup.title("Radio y centro de curvatura")
-        frame_top = ttk.Frame(popup)
-        frame_mid = ttk.Frame(popup)
-        frame_bot = ttk.Frame(popup)
-        frame_top.pack(side=tk.TOP,fill=tk.BOTH,expand=True, padx=5, pady=5)
-        frame_mid.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        frame_bot.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        intervaloLabel = ttk.Label(frame_top, text="Intervalo de tiempo").pack(side=tk.TOP,expand=True)
-        tiempoInicioEntry = ttk.Entry(frame_top, justify='center')
-        tiempoFinalEntry = ttk.Entry(frame_top, justify='center')
-        tiempoLabel = ttk.Label(frame_bot, text="Tiempo: ").pack(side=tk.LEFT,fill=tk.BOTH, expand=True, padx=5, pady=5)
-        tiempoInicioEntry.insert(0,"0")
-        tiempoInicioEntry.configure(state='readonly')
-        tiempoInicioEntry.pack(side=tk.LEFT,expand=True,padx=5,pady=5)
-        tiempoFinalEntry.insert(0,time_impact(self))
-        tiempoFinalEntry.configure(state='readonly')
-        tiempoFinalEntry.pack(side=tk.LEFT,expand=True,padx=5,pady=5)
-
-
-
-
-        """
-        ########## RADIO BUTTONS
-
-        v = tk.IntVar()
-        radioB1 = tk.Radiobutton(popup, text="Tiempo", variable=v, value=1, command=radioButtons())
-        radioB2 = tk.Radiobutton(popup, text="Posicion", variable=v, value=2, command=radioButtons())
-        ## PACK RADIOB
-        radioB1.pack(side=tk.TOP, fill=tk.BOTH, expand=False, padx=5 , pady=5)
-        radioB2.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=False, padx=5, pady=5)
-
-        #tiempo = ttk.Label(frame_top)
-        ########################
-        """
-
-        # Crea un frame contenedor para la izquierda y la derecha
-
-        """validacion_tiempo = (frame_abajo.register(check), '%v', '%P')
-        # validacion_y = (frame_derecha.register(check), '%v', '%P')
-
-        # Crea las titulos de la entrada de datos
-        tiempo = ttk.Label(frame_abajo, text="Tiempo: ")
-        tiempo_init = ttk.Label(frame_arriba, text="Intervalo de tiempo")
-        tiempo_init_x = ttk.Entry(frame_arriba, state='readonly', justify='center')
-        tiempo_init_y = ttk.Entry(frame_arriba, state='readonly')
-        tiempo_init.pack(side=tk.TOP)
-        tiempo_init_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        tiempo_init_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        tiempo_init_x.configure(state='normal')
-        tiempo_init_x.delete(0, 'end')
-        tiempo_init_x.insert(0, "0")
-        tiempo_init_x.configure(state='readonly')
-        # inicializa el punto de interseccion del eje Y
-        tiempo_init_y.configure(state='normal')
-        tiempo_init_y.delete(0, 'end')
-        tiempo_init_y.insert(0, time_impact(self))
-        tiempo_init_y.configure(state='readonly')
-
-        # Separador de datos
-        separador = ttk.Separator(frame_centro, orient="horizontal")
-        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
-        # Crea formularios para entrada de datos
-        entrada_tiempo = ttk.Entry(frame_abajo, validate="key", validatecommand=validacion_tiempo)
-        # entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
-
-        tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        # posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-        entrada_tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        # entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
-        aceptar.pack(fill=tk.BOTH, expand=1)
-        aceptar.bind("<Button-1>", copiar_valores)"""
-
+        # TEST DRAW #
         pass
+
     def boton_aceleracion_normal_y_tangencialf(self):
         pass
 
