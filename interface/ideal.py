@@ -548,6 +548,7 @@ class Interface:
         ##################
 
         # Crear POPUP NUEVO #
+
         popup = tk.Tk()
         popup.title("Radio y centro de curvatura")
         frame_top = ttk.Frame(popup)
@@ -556,6 +557,7 @@ class Interface:
         frame_top.pack(side=tk.TOP,fill=tk.BOTH,expand=True, padx=5, pady=5)
         frame_mid.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
         frame_bot.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        validacion_tiempo = (frame_bot.register(check), '%v', '%P')
         intervaloLabel = ttk.Label(frame_top, text="Intervalo de tiempo").pack(side=tk.TOP,expand=True)
         tiempoInicioEntry = ttk.Entry(frame_top, justify='center')
         tiempoFinalEntry = ttk.Entry(frame_top, justify='center')
@@ -566,7 +568,8 @@ class Interface:
         tiempoFinalEntry.insert(0,time_impact(self))
         tiempoFinalEntry.configure(state='readonly')
         tiempoFinalEntry.pack(side=tk.LEFT,expand=True,padx=5,pady=5)
-        tiempoUsuarioEntry = ttk.Entry(frame_bot).pack(side=tk.LEFT,expand=True)
+        tiempoUsuarioEntry = ttk.Entry(frame_bot,validate="key",validatecommand=validacion_tiempo)
+        tiempoUsuarioEntry.pack(side=tk.LEFT,expand=True)
         botonAceptar = ttk.Button(frame_bot,text="Aceptar")
         botonAceptar.pack(side=tk.BOTTOM,expand=1,fill=tk.BOTH)
         botonAceptar.bind("<Button-1>",copiarTiempo)
