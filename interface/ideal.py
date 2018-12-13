@@ -51,7 +51,7 @@ class Interface:
         self.boton_alcance_horizontal = ttk.Button(self.opciones, text="Alcance Horizontal", width=10, command=lambda: self.boton_alcance_horizontalf())
         self.boton_altura_maxima = ttk.Button(self.opciones, text="Altura Màxima", width=10, command=lambda: self.boton_altura_maximaf())
         self.boton_camino_recorrido = ttk.Button(self.opciones, text="Camino Recorrido", width=10, command=lambda: self.boton_camino_recorridof())
-        self.boton_radio_y_centro_de_curvatura_circulo_obsculador = ttk.Button(self.opciones, text="Radio y Centro de Curvatura y Circulo Obsculador", width=10, command=lambda: self.boton_radio_y_centro_de_curvatura_circulo_obsculadorf())
+        self.boton_radio_y_centro_de_curvatura_circulo_obsculador = ttk.Button(self.opciones, text="Radio y Centro de Curvatura y Circulo Obsculador", width=10, command=lambda: self.boton_radio_y_centro_de_curvatura_circulo_obsculadorf)
         self.boton_aceleracion_normal_y_tangencial = ttk.Button(self.opciones, text="A. normal y tangencial", width=10, command=lambda: self.boton_aceleracion_normal_y_tangencialf())
         self.boton_vector_normal = ttk.Button(self.opciones, text="Vector normal", width=10,
                                               command=lambda: self.boton_vector_normalf())
@@ -345,41 +345,6 @@ class Interface:
         pass
 
     def boton_aceleracionf(self):
-        # pop up de ingreso de datos
-
-        # funcion de tiempo de impacto
-        def tiempo_impact():
-            return 0
-
-        # pop up
-
-        Pop_Up = tk.Tk()
-        Pop_Up.title("Aceleracion")
-        Pop_Up.minsize(400, 300)
-
-        label = tk.Label(Pop_Up)
-        label.pack()
-
-        #crear frame contenedor
-
-        # Separador de datos
-        separador = ttk.Separator(Pop_Up, orient="horizontal")
-        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
-
-        e = ttk.Entry(Pop_Up)
-        e.pack(side=tk.BOTTOM, expand=True)
-
-        button = ttk.Button(Pop_Up, text='Evaluar', width=10, command=Pop_Up.destroy)
-        button.pack(side=tk.BOTTOM, padx=5, pady=5)
-
-        Pop_Up.mainloop()
-
-        # formulas de generamiento de datos a graficar
-        # funcion para el calculo de la coordenada horizontal
-        # generamiento de la grafica
-        # generacion del punto de posicion a medir
-        # generacion del vector con origen en el punto de posicion
-        # posible desplazamiento con deslizador
 
             #funcion para la obtencion de tiempo impacto final
         def time_impact(self):
@@ -409,80 +374,50 @@ class Interface:
                               (self.gravedad))*sqrt(((self.velocidad_inicial*sin(self.angulo))**2) + 2*self.y0*self.gravedad)
             return alc
 
+            # generamiento de la grafica
+        def GraficarFuncion(self,entrada_tiempo):
 
-        # pop up de ingreso de datos
-
-        raiz = tk.Tk() #se crea la raiz del pop-up
-        raiz.title("ingrese tiempo para medir") #se cambia el titulo de la ventana
-        raiz.resizable(False,False)#se bloquea el pop-up para que no lo puedan extender
-        frame= ttk.Frame(raiz, width=300 , height=300 ) #se genera el frame
-        frame.pack() #se empaqueta a la raiz
-
-        ttk.Label(frame, text = "El intervalo de tiempo es: ").place(x=60, y=10) #se define el label de titulo
-        ttk.Label(frame, text = "inicio: 0").place(x= 50, y = 60)#se define el valor de inicio del intervalo
-        ttk.Label(frame, text = "final: "+str(time_impact(self))).place(x= 150, y = 60)#se define el valor final del intervalo dado por t
-        ttk.Label(frame, text = "ingrese el tiempo a graficar: ").place(x= 50,y = 120)#titulo que indica ingresar tiempo
-
-        ttk.Label(frame, text = "->").place(x= 30, y =170)#flecha direccion
-        ttk.Label(frame, text = "seg").place(x= 230, y=170)#unidad de medida de seg que aparece al lado del cuadro de texto
-        cuadroTexto = ttk.Entry(raiz).place(x= 60, y = 170)#cuadro de texto para ingresar
-
-        botonEvaluar = ttk.Button(raiz, text= "evaluar", command= GraficarFuncion(self)).place(x= 105, y= 220)
-
-
-        raiz.mainloop() 
-
-        # generamiento de la grafica
-
-        def GraficarFuncion(self):
-                #generacion de la grafica del tiempo ingresado
-            time = np.arange(0,time_usuario,0.01)
+            # generacion de la grafica del tiempo ingresado
+            time = np.arange(0, entrada_tiempo, 0.01)
             x = cord_x(self, time)
             y = cord_y(self, time)
 
-                #grafica completa del lanzamiento
-            time_complete = np.arange(0,time_impact(self)+4, 0.01)
+            # grafica completa del lanzamiento
+            time_complete = np.arange(0, time_impact(self) + 4, 0.01)
             x2 = cord_x(self, time_complete)
             y2 = cord_y(self, time_complete)
 
-                #generacion del punto de posicion a medir
-            x3 = cord_x(self, time_usuario)
-            y3 = cord_y(self, time_usuario)
+            # generacion del punto de posicion a medir
+            x3 = cord_x(self, entrada_tiempo)
+            y3 = cord_y(self, entrada_tiempo)
 
-
-                #estetica de la grafica
+            # estetica de la grafica
             mpl.title("Aceleracion")
-            mpl.xlim(0,alcance_max(self)+self.x0)
-            mpl.ylim(0,altura_max(self)+self.y0)
+            mpl.xlim(0, alcance_max(self) + self.x0)
+            mpl.ylim(0, altura_max(self) + self.y0)
             mpl.xlabel("-Distancia-")
             mpl.ylabel("-Altura-")
 
-                #generamiento de las curvas
-            mpl.plot(self.x0, self.y0, "k-o")#punto pos inicial
-            mpl.plot(x,y,"y-")#curva del usuario
-            mpl.plot(x2,y2,"k--")#lanzamiento completo
-            mpl.plot(x3, y3, "r-o")#punto del usuario
-            mpl.grid()#cuadriculado
+            # generamiento de las curvas
+            mpl.plot(self.x0, self.y0, "k-o")  # punto pos inicial
+            mpl.plot(x, y, "y-")  # curva del usuario
+            mpl.plot(x2, y2, "k--")  # lanzamiento completo
+            mpl.plot(x3, y3, "r-o")  # punto del usuario
+            mpl.grid()  # cuadriculado
 
-                #generacion del vector con origen en el punto de posicion
-            mpl.plot(x3,y3-time_impact(self) ,"g-o")
+            # generacion del vector con origen en el punto de posicion
+            mpl.plot(x3, y3 - time_impact(self), "g-o")
 
             mpl.show()
             return 0
 
-        #posible desplazamiento con
-        pass
+        # pop up de ingreso de datos
+        def copiar_valores(event):
+            self.tiempo_datos[0] = entrada_tiempo.get()
 
-    def boton_alcance_horizontalf(self):
-        pass
+            master.destroy()
 
-    def boton_altura_maximaf(self):
-        pass
-
-    def boton_camino_recorridof(self):
-        pass
-
-    def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
+        # Metodo para validar la entrada de datos (Solo Numeros por ahora)
         def check(v, p):
             if p.isdigit():
                 return True
@@ -491,47 +426,9 @@ class Interface:
             else:
                 return False
 
-        def time_impact(self):
-            t = ((self.velocidad_inicial * sin(self.angulo)) / (self.gravedad)) + ((1 / self.gravedad) * (
-            sqrt(((self.velocidad_inicial * sin(self.angulo)) ** 2) + (2 * self.y0 * self.gravedad))))
-            print(t)
-            return t
-        def copiar_valores(event):
-            self.tiempo_datos[0] = entrada_tiempo.get()
-            master.destroy()
+        # Datos Iniciales
 
-        ###### TEST PRINT DATOS
-        print(self.tiempo_datos)
-        print("TIEMPO DATOS")
-
-        # DATOS DE PRUEBA
-
-        ang=np.pi/3 # REEMPLAZAR POR self.angulo_inicial ?
-        g = 10  # Constante
-        t = 1   # Este parametro se toma desde la ventana generada
-        v0=150  # REEMPLAZAR POR self.velocidad_inicial ?
-        x0=10   # ---------^
-        x=0     # Este parametro se toma desde la ventana generada
-        y=0     # ---------^
-
-        ##################
-        # ECUACIONES
-
-        curvatura_pos = (np.abs(-g/(np.power(v0*np.cos(ang),2)))/(np.power(1+np.power(np.tan(ang)-g/np.power(v0*np.cos(ang),2)*(x-x0),2),3/2)))
-        curvatura_t = (np.abs(-(g)/np.power(v0*np.cos(ang),2))/np.power(1+np.power(np.tan(ang)-(g/v0*np.cos(ang)*t),2),3/2))
-        r_curvatura_pos = ((np.power(1+np.power(np.tan(ang)-g/(np.power(v0*np.cos(ang),2)*(x-x0)),2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
-        r_curvatura_t = ((np.power(1+np.power(np.tan(ang)-g/v0*np.tan(ang)*t,2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
-        centro_cuvatura_x=x-(((np.tan(ang)-(g/np.power(v0*np.cos(ang),2))*(x-x0))*(1+np.power(np.tan(ang)-(g/np.power(v0*np.cos(ang)*(x-x0),2)),2)))/(-g/np.power(v0*np.cos(ang),2)))
-        #centro_curvatura_y=
-        print("Curvatura en tiempo X: "+str(curvatura_t))
-        print("Curvatura en posicion: "+str(curvatura_pos))
-        print("Radio en posicion: "+str(r_curvatura_pos))
-        print("Radio en tiempo X:"+str(r_curvatura_t))
-        print("Centro de curvatura pos x:" +str(centro_cuvatura_x))
-
-        ##################
-
-        # TEST DRAW #
+        #  inicializa la ventana popup
         master = tk.Tk()
         master.title("Posicion")
         # Crea un frame contenedor para la izquierda y la derecha
@@ -546,6 +443,146 @@ class Interface:
         frame_centro.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
         frame_abajo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
         frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        # Crea las titulos de la entrada de datos
+        tiempo = ttk.Label(frame_abajo, text="Tiempo: ")
+        tiempo_init = ttk.Label(frame_arriba, text="Intervalo de tiempo")
+        tiempo_init_x = ttk.Entry(frame_arriba, state='readonly', justify='center')
+        tiempo_init_y = ttk.Entry(frame_arriba, state='readonly', justify='center')
+        tiempo_init.pack(side=tk.TOP)
+        tiempo_init_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_x.configure(state='normal')
+        tiempo_init_x.delete(0, 'end')
+        tiempo_init_x.insert(0, "0")
+        tiempo_init_x.configure(state='readonly')
+        # inicializa el punto de interseccion del eje Y
+        tiempo_init_y.configure(state='normal')
+        tiempo_init_y.delete(0, 'end')
+        tiempo_init_y.insert(0, time_impact(self))
+        tiempo_init_y.configure(state='readonly')
+
+        # Separador de datos
+        separador = ttk.Separator(frame_centro, orient="horizontal")
+        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
+        # Crea formularios para entrada de datos
+        entrada_tiempo = ttk.Entry(frame_abajo, validate="key", validatecommand=validacion_tiempo)
+        # entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
+
+        tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        # posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        entrada_tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        # entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
+        aceptar.pack(fill=tk.BOTH, expand=1)
+        aceptar.bind("<Button-1>", copiar_valores)
+
+
+        #posible desplazamiento con
+        pass
+
+    def boton_alcance_horizontalf(self):
+        pass
+
+    def boton_altura_maximaf(self):
+        pass
+    def boton_camino_recorridof(self):
+        pass
+
+    @property
+    def boton_radio_y_centro_de_curvatura_circulo_obsculadorf(self):
+        def check(v, p):
+            if p.isdigit():
+                return True
+            elif p is "":
+                return True
+            else:
+                return False
+        def time_impact(self):
+            t = ((self.velocidad_inicial * sin(self.angulo)) / (self.gravedad)) + ((1 / self.gravedad) * (
+            sqrt(((self.velocidad_inicial * sin(self.angulo)) ** 2) + (2 * self.y0 * self.gravedad))))
+            return round(t,2)
+        def validarIntervaloTiempo(valor):
+            return (valor>0 &valor<=time_impact(self))
+        """def radioButtons():
+            print(v.get())
+            return v.get()
+        """
+        # DATOS DE PRUEBA
+
+        ang=np.pi/3 # REEMPLAZAR POR self.angulo_inicial ?
+        g = 10  # Constante
+        t = 1   # Este parametro se toma desde la ventana generada
+        v0=150  # REEMPLAZAR POR self.velocidad_inicial ?
+        x0=10   # ---------^
+        y0=20   #
+        x=0     # Este parametro se toma desde la ventana generada
+        y=0     # ---------^
+
+        ##################
+        # ECUACIONES
+
+        curvatura_pos = (np.abs(-g/(np.power(v0*np.cos(ang),2)))/(np.power(1+np.power(np.tan(ang)-g/np.power(v0*np.cos(ang),2)*(x-x0),2),3/2)))
+        curvatura_t = (np.abs(-(g)/np.power(v0*np.cos(ang),2))/np.power(1+np.power(np.tan(ang)-(g/v0*np.cos(ang)*t),2),3/2))
+        r_curvatura_pos = ((np.power(1+np.power(np.tan(ang)-g/(np.power(v0*np.cos(ang),2)*(x-x0)),2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
+        r_curvatura_t = ((np.power(1+np.power(np.tan(ang)-g/v0*np.tan(ang)*t,2),3/2))/(np.abs(-g/np.power(v0*np.cos(ang),2))))
+        centro_curvatura_x=x-(((np.tan(ang)-(g/np.power(v0*np.cos(ang),2))*(x-x0))*(1+np.power(np.tan(ang)-(g/np.power(v0*np.cos(ang)*(x-x0),2)),2)))/(-g/np.power(v0*np.cos(ang),2)))
+        #centro_curvatura_y=
+        centro_curvatura_xt= x0+v0*cos(ang)*t + (((1+tan(ang)-(g/v0*cos(ang))*t)*(1+np.power(tan(ang)- (g/v0*cos(ang))*t,2))) / (g/np.power(v0*cos(ang),2)))
+        centro_curvatura_yt=y0+v0*sin(ang)*t-(1+np.power(tan(ang)-(g/v0*cos(ang))*t,2)*np.power(v0*cos(ang),2)/g)
+        """
+        print("Curvatura en tiempo X: "+str(curvatura_t))
+        print("Curvatura en posicion: "+str(curvatura_pos))
+        print("Radio en posicion: "+str(r_curvatura_pos))
+        print("Radio en tiempo X:"+str(r_curvatura_t))
+        print("Centro de curvatura pos x:" +str(centro_curvatura_x))
+        print("Centro de curvatura X en T1:" + str(centro_curvatura_xt))
+        print("Centro de curvatura Y en T1" + str(centro_curvatura_yt))
+        """
+        ##################
+
+        # Crear POPUP NUEVO #
+        popup = tk.Tk()
+        popup.title("Radio y centro de curvatura")
+        frame_top = ttk.Frame(popup)
+        frame_mid = ttk.Frame(popup)
+        frame_bot = ttk.Frame(popup)
+        frame_top.pack(side=tk.TOP,fill=tk.BOTH,expand=True, padx=5, pady=5)
+        frame_mid.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_bot.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        intervaloLabel = ttk.Label(frame_top, text="Intervalo de tiempo").pack(side=tk.TOP,expand=True)
+        tiempoInicioEntry = ttk.Entry(frame_top, justify='center')
+        tiempoFinalEntry = ttk.Entry(frame_top, justify='center')
+        tiempoLabel = ttk.Label(frame_bot, text="Tiempo: ").pack(side=tk.LEFT,fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempoInicioEntry.insert(0,"0")
+        tiempoInicioEntry.configure(state='readonly')
+        tiempoInicioEntry.pack(side=tk.LEFT,expand=True,padx=5,pady=5)
+        tiempoFinalEntry.insert(0,time_impact(self))
+        tiempoFinalEntry.configure(state='readonly')
+        tiempoFinalEntry.pack(side=tk.LEFT,expand=True,padx=5,pady=5)
+
+
+
+
+        """
+        ########## RADIO BUTTONS
+
+        v = tk.IntVar()
+        radioB1 = tk.Radiobutton(popup, text="Tiempo", variable=v, value=1, command=radioButtons())
+        radioB2 = tk.Radiobutton(popup, text="Posicion", variable=v, value=2, command=radioButtons())
+        ## PACK RADIOB
+        radioB1.pack(side=tk.TOP, fill=tk.BOTH, expand=False, padx=5 , pady=5)
+        radioB2.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=False, padx=5, pady=5)
+
+        #tiempo = ttk.Label(frame_top)
+        ########################
+        """
+
+        # Crea un frame contenedor para la izquierda y la derecha
+
+        """validacion_tiempo = (frame_abajo.register(check), '%v', '%P')
+        # validacion_y = (frame_derecha.register(check), '%v', '%P')
 
         # Crea las titulos de la entrada de datos
         tiempo = ttk.Label(frame_abajo, text="Tiempo: ")
@@ -579,7 +616,7 @@ class Interface:
         # entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
         aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
         aceptar.pack(fill=tk.BOTH, expand=1)
-        aceptar.bind("<Button-1>", copiar_valores)
+        aceptar.bind("<Button-1>", copiar_valores)"""
 
         pass
 
@@ -601,6 +638,8 @@ class Interface:
 
         button.pack(side=tk.BOTTOM)
 
+
+
         #  inicializa la ventana popup
         tiempofinal= 20
         xo = int(self.entrada_posicion_x0.get())
@@ -608,14 +647,14 @@ class Interface:
         vxo = 15
         vyo = 90
         angulo_inicial =self.entrada_angulo_inicial.get()
-        plt.title("Vector Normal")
-        plt.xlabel("-X-")
-        plt.ylabel("-Y-")
+        mpl.title("Vector Normal")
+        mpl.xlabel("-X-")
+        mpl.ylabel("-Y-")
         x = np.arange(0, tiempofinal, 0.001)
         print(E1.get())
         x1 = 5
-        h = math.sin(math.degrees(int(angulo_inicial)))
-        j = math.cos(math.degrees(int(angulo_inicial)))
+        h = math.sin(math.degrees(angulo_inicial))
+        j = math.cos(math.degrees(angulo_inicial))
         print (h)
         x1=2
         y = yo + vyo * x + (1 / 2) * -9.8 * x ** 2
@@ -624,11 +663,11 @@ class Interface:
         z1 = xo + vxo * x1 + (1 / 2) * 0 * x1 ** 2
         vector_velocidadx= (vxo*x1)
         vector_velocidady = (vyo * h-(9.8*x1))
-        plt.plot(z, y,"-")
-        plt.plot(vector_velocidadx+z1, vector_velocidady+y1, "-o")
-        plt.plot((vector_velocidady+z1), (vector_velocidadx), "-o")
-        plt.plot(z1, y1, "-o")
-        plt.show()
+        mpl.plot(z, y,"-")
+        mpl.plot(vector_velocidadx+z1, vector_velocidady+y1, "-o")
+        mpl.plot((vector_velocidady+z1), (vector_velocidadx), "-o")
+        mpl.plot(z1, y1, "-o")
+        mpl.show()
         pass
     def actualizar_grafico(self,ecuacion_x,ecuacion_y):
         self.figura.clear() # Refresca el gráfico
