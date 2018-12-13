@@ -571,8 +571,56 @@ class Interface:
         print("Centro de curvatura pos x:" +str(centro_cuvatura_x))
 
         ##################
-
+        
         # TEST DRAW #
+        master = tk.Tk()
+        master.title("Fisica")
+        # Crea un frame contenedor para la izquierda y la derecha
+        frame_arriba = ttk.Frame(master)
+        frame_centro = ttk.Frame(master)
+        frame_abajo = ttk.Frame(master)
+        frame_aceptar = ttk.Frame(master)
+        validacion_tiempo = (frame_abajo.register(check), '%v', '%P')
+        # validacion_y = (frame_derecha.register(check), '%v', '%P')
+
+        frame_arriba.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_centro.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_abajo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        frame_aceptar.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        # Crea las titulos de la entrada de datos
+        tiempo = ttk.Label(frame_abajo, text="Tiempo: ")
+        tiempo_init = ttk.Label(frame_arriba, text="Intervalo de tiempo")
+        tiempo_init_x = ttk.Entry(frame_arriba, state='readonly', justify='center')
+        tiempo_init_y = ttk.Entry(frame_arriba, state='readonly')
+        tiempo_init.pack(side=tk.TOP)
+        tiempo_init_x.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        tiempo_init_x.configure(state='normal')
+        tiempo_init_x.delete(0, 'end')
+        tiempo_init_x.insert(0, "0")
+        tiempo_init_x.configure(state='readonly')
+        # inicializa el punto de interseccion del eje Y
+        tiempo_init_y.configure(state='normal')
+        tiempo_init_y.delete(0, 'end')
+        tiempo_init_y.insert(0, time_impact(self))
+        tiempo_init_y.configure(state='readonly')
+
+        # Separador de datos
+        separador = ttk.Separator(frame_centro, orient="horizontal")
+        separador.pack(side=tk.TOP, expand=False, fill=tk.X)
+        # Crea formularios para entrada de datos
+        entrada_tiempo = ttk.Entry(frame_abajo, validate="key", validatecommand=validacion_tiempo)
+        # entrada_y = ttk.Entry(frame_derecha, validate="key", validatecommand=validacion_y)
+
+        tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        # posicion_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        entrada_tiempo.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        # entrada_y.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+        aceptar = ttk.Button(frame_aceptar, text="ACEPTAR")
+        aceptar.pack(fill=tk.BOTH, expand=1)
+        aceptar.bind("<Button-1>", copiar_valores)
         pass
 
     def boton_aceleracion_normal_y_tangencialf(self):
